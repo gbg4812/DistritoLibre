@@ -75,10 +75,17 @@ const props = defineProps(['post']);
 
 .article-container h1, h2 {
     margin: 0.3rem;
+    margin-left: 1em;
+    margin-right: 1em;
 }
 
 .article-container h2 {
+    text-align: right;
     color: gray;
+}
+
+.article-container h1 {
+    text-align: left;
 }
 
 .article-container p {
