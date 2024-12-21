@@ -1,12 +1,10 @@
 <script setup>
-import PostCard from './PostCard.vue';
-import { ref } from 'vue';
+import PostCard from "./PostCard.vue";
+import { ref } from "vue";
 
-
-const posts = ref(null); 
+const posts = ref(null);
 
 fetchBooks();
-
 
 async function fetchBooks() {
     try {
@@ -17,7 +15,7 @@ async function fetchBooks() {
             throw new Error("Network connection error!");
         }
         const data = await response.json();
-        console.log(data)
+        console.log(data);
         posts.value = data;
     } catch (error) {
         console.error("problem fetching the Post!");
@@ -27,15 +25,16 @@ async function fetchBooks() {
 
 <template>
     <div v-if="posts" class="posts-container">
-        <PostCard  v-for="post in posts" :key="post.id" :post="post" /> 
+        <PostCard v-for="post in posts" :key="post.id" :post="post" />
     </div>
 </template>
 
 <style scoped>
- .posts-container {
-     display: flex;
-     flex-direction: column;
-     margin-left: auto;
-     margin-right: auto;
- } 
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+}
 </style>

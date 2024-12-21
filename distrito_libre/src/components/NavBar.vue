@@ -1,19 +1,22 @@
 <script setup>
-import { Icon } from '@iconify/vue';
+import { Icon } from "@iconify/vue";
 </script>
 
 <template>
     <div class="nav-container">
-        <h1>Distrito Libre</h1> 
-        <Icon icon="mingcute:menu-fill" class="menu-symbol"/>
+        <h1>Distrito Libre</h1>
+        <Icon icon="mingcute:menu-fill" class="menu-symbol" />
     </div>
 </template>
 
 <style scoped>
-
 .nav-container {
     display: flex;
     flex-direction: row;
+    color: white;
+    background: black;
+    position: sticky;
+    top: 0px;
 }
 
 .menu-symbol {

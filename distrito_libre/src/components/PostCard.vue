@@ -1,9 +1,8 @@
 <script setup>
-import { defineProps } from 'vue';
+import { Icon } from "@iconify/vue";
+import { defineProps } from "vue";
 
-const props = defineProps(['post']);
-
-
+const props = defineProps(["post"]);
 </script>
 
 <template>
@@ -11,7 +10,7 @@ const props = defineProps(['post']);
         <div class="content-container">
             <h2>{{ props.post.title }}</h2>
             <div class="image-holder">
-                <img :src="props.post.logo"/>
+                <Icon :icon="props.post.logo" />
             </div>
             <h2>{{ props.post.author }}</h2>
         </div>
@@ -25,13 +24,12 @@ const props = defineProps(['post']);
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 .post-container {
     --content-width: 15rem;
     --article-width: 30rem;
     --black-border: 1px solid black;
     background: white;
-    height: calc(calc(var(--content-width) + var(--article-width))/3);
+    height: calc(calc(var(--content-width) + var(--article-width)) / 3);
     width: calc(var(--content-width) + var(--article-width));
     margin-left: auto;
     margin-right: auto;
@@ -41,7 +39,7 @@ const props = defineProps(['post']);
     box-shadow: 5px 5px black;
 }
 .post-container * {
-   box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .content-container {
@@ -58,13 +56,10 @@ const props = defineProps(['post']);
 .image-holder {
     grid-row: 2;
     display: flex;
+    font-size: 10rem;
+    margin: auto;
     /*border-top: 1px solid black;
     border-bottom: 1px solid black;*/
-}
-
-.image-holder img {
-    width: 50%;
-    margin: auto;
 }
 
 .article-container {
@@ -73,10 +68,11 @@ const props = defineProps(['post']);
     overflow: clip;
 }
 
-.article-container h1, h2 {
-    margin: 0.3rem;
-    margin-left: 1em;
-    margin-right: 1em;
+.article-container h1,
+h2 {
+    margin: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .article-container h2 {
@@ -90,6 +86,6 @@ const props = defineProps(['post']);
 
 .article-container p {
     text-align: justify;
-    padding: 2rem;
+    margin: 1rem;
 }
 </style>
