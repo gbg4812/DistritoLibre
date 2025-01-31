@@ -1,11 +1,13 @@
 <script setup>
 import { Icon } from "@iconify/vue";
+import ContentMenu from "./ContentMenu.vue";
 </script>
 
 <template>
     <div class="nav-container">
         <h1>Distrito Libre</h1>
-        <Icon icon="mingcute:menu-fill" class="menu-symbol" />
+
+        <ContentMenu class="content-menu"></ContentMenu>
     </div>
 </template>
 
@@ -13,19 +15,20 @@ import { Icon } from "@iconify/vue";
 .nav-container {
     display: flex;
     flex-direction: row;
+    align-items: bottom;
     color: white;
     background: black;
-    position: sticky;
+    position: fixed;
     top: 0px;
+    width: 100%;
+    z-index: 1;
+    height: 4rem;
 }
 
-.menu-symbol {
-    font-size: 32pt;
-    margin: auto;
-    margin-right: 0.5em;
-}
 .nav-container h1 {
-    margin: 0.5em;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 1rem;
     margin-right: auto;
 }
 </style>
