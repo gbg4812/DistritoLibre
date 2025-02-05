@@ -1,8 +1,13 @@
-from django.core import serializers
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
+from .models import Post
+from .serializers import PostsSerializer
 
 
-# Create your views here.
-def getposts(request, section):
-    return
+@csrf_exempt
+def post_list(request):
+    if request.method == "GET":
+        posts = Post.objects.all()
+        serializer = PostsSerializer(posts, many=True)
+        return JsonResponse(serializer.data, safe=False)

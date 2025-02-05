@@ -7,31 +7,34 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('posts', '0001_initial'),
+        ("posts", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='author',
-            field=models.ForeignKey(default=posts.models.get_anonymus_author, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="post",
+            name="author",
+            field=models.ForeignKey(
+                default=posts.models.get_anonymus_user,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AddField(
-            model_name='post',
-            name='content',
+            model_name="post",
+            name="content",
             field=models.CharField(blank=True, max_length=1000),
         ),
         migrations.AddField(
-            model_name='post',
-            name='coverimg',
+            model_name="post",
+            name="coverimg",
             field=models.URLField(blank=True),
         ),
         migrations.AddField(
-            model_name='post',
-            name='section',
-            field=models.CharField(default='NOSECTION', max_length=50),
+            model_name="post",
+            name="section",
+            field=models.CharField(default="NOSECTION", max_length=50),
         ),
     ]
