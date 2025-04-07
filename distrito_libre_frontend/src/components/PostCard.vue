@@ -2,7 +2,12 @@
 import { Icon } from "@iconify/vue";
 import { defineProps } from "vue";
 
-const props = defineProps(["post"]);
+const props = defineProps({
+    post: {
+        required: true,
+        type: Object,
+    },
+});
 </script>
 
 <template>
@@ -10,14 +15,14 @@ const props = defineProps(["post"]);
         <div class="content-container">
             <h2>{{ props.post.title }}</h2>
             <div class="image-holder">
-                <Icon :icon="props.post.logo" />
+                <Icon :icon="props.post.coverimg" />
             </div>
-            <h2>{{ props.post.author }}</h2>
+            <h2>{{ props.post.author.username }}</h2>
         </div>
         <div class="article-container">
             <h1>{{ props.post.title_art }}</h1>
             <h2>{{ props.post.author_art }}</h2>
-            <p>{{ props.post.summary_art }}</p>
+            <p>{{ props.post.content }}</p>
         </div>
     </div>
 </template>

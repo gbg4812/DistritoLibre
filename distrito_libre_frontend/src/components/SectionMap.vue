@@ -2,7 +2,13 @@
 import SvgComponent from "./SvgComponent.vue";
 import SvgContainer from "./SvgContainer.vue";
 import { store } from "../store";
-import { politicalMap, selectionStage } from "../constants";
+import { politicalMap } from "../constants";
+import router from "../router";
+
+const nextStep = (id) => {
+    store.section = id;
+    router.push("/buildings");
+};
 </script>
 
 <template>
@@ -15,12 +21,7 @@ import { politicalMap, selectionStage } from "../constants";
                 or
                 :url="`./assets/sectors/sectors.${index}.svg`"
                 :name="politicalMap[store.plane][index - 1]"
-                @svg-click="
-                    (id) => {
-                        store.section = id;
-                        store.sel_stage = selectionStage.BUILDING;
-                    }
-                "
+                @svg-click="nextStep(id)"
             />
         </SvgContainer>
     </div>

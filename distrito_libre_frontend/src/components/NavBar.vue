@@ -1,12 +1,13 @@
 <script setup>
-import { Icon } from "@iconify/vue";
+import router from "../router";
 import ContentMenu from "./ContentMenu.vue";
+import { RouterLink } from "vue-router";
 </script>
 
 <template>
     <div class="nav-container">
-        <h1>Distrito Libre</h1>
-
+        <RouterLink to="/">Distrito Libre</RouterLink>
+        <h2>{{ router.currentRoute.value.fullPath }}</h2>
         <ContentMenu class="content-menu"></ContentMenu>
     </div>
 </template>
@@ -15,7 +16,7 @@ import ContentMenu from "./ContentMenu.vue";
 .nav-container {
     display: flex;
     flex-direction: row;
-    align-items: bottom;
+    align-items: center;
     color: white;
     background: black;
     position: fixed;
@@ -25,10 +26,16 @@ import ContentMenu from "./ContentMenu.vue";
     height: 4rem;
 }
 
-.nav-container h1 {
-    margin-top: auto;
-    margin-bottom: auto;
+.nav-container a {
+    font-size: 2em;
+    color: white;
+    font-weight: 800;
+    text-decoration: none;
     margin-left: 1rem;
-    margin-right: auto;
+    margin-right: 1rem;
+}
+
+.content-menu {
+    flex-grow: 1;
 }
 </style>

@@ -3,18 +3,17 @@ import SvgComponent from "./SvgComponent.vue";
 import SvgContainer from "./SvgContainer.vue";
 import { Planes, selectionStage } from "../constants.js";
 import { store } from "../store";
+import router from "../router.js";
 
 function setPlane(plane) {
-    console.log("clicked!");
     store.plane = plane;
-    store.sel_stage = selectionStage.SECTION;
-    window.scrollTo(0, 0);
+    router.push("/sections");
 }
 </script>
 
 <template>
     <div>
-        <SvgContainer v-if="store.sel_stage == selectionStage.PLANE">
+        <SvgContainer>
             <SvgComponent
                 url="./assets/planes.0.svg"
                 @svg-click="setPlane(Planes.CENTER_RIGHT)"

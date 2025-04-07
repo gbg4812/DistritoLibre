@@ -8,9 +8,7 @@ fetchBooks();
 
 async function fetchBooks() {
     try {
-        const response = await fetch(
-            "http://127.0.0.1:8000/preguteca/api/posts/"
-        );
+        const response = await fetch("http://127.0.0.1:8000/posts/");
         if (!response.ok) {
             throw new Error("Network connection error!");
         }
