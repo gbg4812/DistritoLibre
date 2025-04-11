@@ -22,8 +22,9 @@ const content = ref("");
 promise
     .then((resp) => resp.text())
     .then((svgcode) => {
-        content.value = ref(svgcode);
-    });
+        content.value = svgcode;
+    })
+    .catch(() => console.error("Failed to fetch svg component content!"));
 
 function onClick(event) {
     if (event.target.id != "svg-cont" && event.target.localName != "svg") {
@@ -34,12 +35,7 @@ function onClick(event) {
 </script>
 
 <template>
-    <g
-        id="svg-cont"
-        class="svg-cont"
-        @click="onClick"
-        v-html="content.value"
-    ></g>
+    <g id="svg-cont" class="svg-cont" @click="onClick" v-html="content"></g>
 </template>
 
 <style scoped>

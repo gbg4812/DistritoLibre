@@ -8,22 +8,28 @@ import { RouterLink } from "vue-router";
     <div class="nav-container">
         <RouterLink to="/">Distrito Libre</RouterLink>
         <h2>{{ router.currentRoute.value.fullPath }}</h2>
-        <ContentMenu class="content-menu"></ContentMenu>
+        <ContentMenu></ContentMenu>
     </div>
 </template>
 
 <style scoped>
 .nav-container {
     display: flex;
+
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    color: white;
-    background: black;
+
+    width: 100%;
+    height: 4rem;
     position: fixed;
     top: 0px;
-    width: 100%;
     z-index: 1;
-    height: 4rem;
+    box-sizing: border-box;
+
+    color: white;
+    background: black;
+    border: 1px solid white;
 }
 
 .nav-container a {
@@ -33,9 +39,5 @@ import { RouterLink } from "vue-router";
     text-decoration: none;
     margin-left: 1rem;
     margin-right: 1rem;
-}
-
-.content-menu {
-    flex-grow: 1;
 }
 </style>

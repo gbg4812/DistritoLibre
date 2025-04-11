@@ -1,6 +1,5 @@
 <script setup>
 import { Icon } from "@iconify/vue";
-import { defineProps } from "vue";
 
 const props = defineProps({
     post: {
@@ -12,23 +11,28 @@ const props = defineProps({
 
 <template>
     <div v-if="props.post" class="post-container">
-        <div class="content-container">
-            <h2>{{ props.post.title }}</h2>
-            <div class="image-holder">
-                <Icon :icon="props.post.coverimg" />
-            </div>
-            <h2>{{ props.post.author.username }}</h2>
+        <div class="coverimg-container">
+            <Icon :icon="props.post.coverimg" />
         </div>
         <div class="article-container">
-            <h1>{{ props.post.title_art }}</h1>
-            <h2>{{ props.post.author_art }}</h2>
+            <h1 class="title">{{ props.post.title }}</h1>
+            <h2 class="subtitle">{{ props.post.author.username }}</h2>
             <p>{{ props.post.content }}</p>
+            <div class="lupa"></div>
         </div>
     </div>
 </template>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.lupa {
+    position: absolute;
+    background-image: linear-gradient(to bottom, #ffffff00, #ffffffff 85%);
+    bottom: 0px;
+    left: 0px;
+    height: 3rem;
+    width: 100%;
+}
 .post-container {
     --content-width: 15rem;
     --article-width: 30rem;
@@ -43,41 +47,21 @@ const props = defineProps({
     border: var(--black-border);
     box-shadow: 5px 5px black;
 }
-.post-container * {
-    box-sizing: border-box;
-}
 
-.content-container {
+.coverimg-container {
     width: var(--content-width);
-    display: grid;
-    grid-template-rows: 1fr 3fr 1fr;
-}
-
-.content-container h2 {
-    width: 100%;
-    margin: auto;
-}
-
-.image-holder {
-    grid-row: 2;
-    display: flex;
-    font-size: 10rem;
-    margin: auto;
-    /*border-top: 1px solid black;
-    border-bottom: 1px solid black;*/
 }
 
 .article-container {
     width: var(--article-width);
     border-left: var(--black-border);
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: start;
     overflow: clip;
-}
-
-.article-container h1,
-h2 {
-    margin: 1rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    padding: 1rem;
+    flex-grow: 0;
 }
 
 .article-container h2 {
@@ -87,10 +71,11 @@ h2 {
 
 .article-container h1 {
     text-align: left;
+    flex-grow: 0;
 }
 
 .article-container p {
     text-align: justify;
-    margin: 1rem;
+    flex-grow: 1;
 }
 </style>

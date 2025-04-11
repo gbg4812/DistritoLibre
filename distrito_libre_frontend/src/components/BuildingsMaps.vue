@@ -56,11 +56,7 @@ const buildingsWithIcons = [
 
 <template>
     <div id="build-cont">
-        <RouterLink
-            v-for="b in buildingsWithIcons"
-            :key="b.name"
-            :to="'/buildings/' + b.name"
-        >
+        <RouterLink v-for="b in buildingsWithIcons" :key="b.name" to="/posts">
             <BuildingCard :name="b.name" :svg-img="b.iconUrl"></BuildingCard>
         </RouterLink>
     </div>
@@ -69,6 +65,13 @@ const buildingsWithIcons = [
 <style scoped>
 #build-cont {
     display: grid;
+    gap: 2rem;
+    margin: 2rem;
     grid-template-columns: repeat(4, 1fr);
+}
+
+a {
+    color: black;
+    text-decoration: none;
 }
 </style>

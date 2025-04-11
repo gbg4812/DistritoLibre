@@ -7,9 +7,7 @@ const show_menu = ref(false);
 <template>
     <div id="wraper">
         <!-- we need the item before the content to ocupi all the space -->
-        <div id="title-wraper">
-            <h3 id="title" @mouseenter="show_menu = true">Menu</h3>
-        </div>
+        <h3 id="title" @mouseenter="show_menu = true">Menu</h3>
         <div v-if="show_menu" id="content" @mouseleave="show_menu = false">
             <a>Categories</a>
             <a>About Us</a>
@@ -19,33 +17,30 @@ const show_menu = ref(false);
 </template>
 
 <style scoped>
-#wraper {
-    height: 100%;
-    margin: 0px;
+#title {
+    text-align: center;
+    padding: 1rem;
 }
 
-#title-wraper {
-    height: 100%;
+#wraper {
     display: flex;
     flex-direction: column;
-    margin-right: 1rem;
-}
-
-#title {
-    margin: auto;
-    position: static;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
 }
 
 #content {
     position: absolute;
     display: flex;
     flex-direction: column;
-    width: 100vw;
+    width: 20rem;
+    top: 100%;
     right: 0px;
 
     box-sizing: border-box;
-    border-top: 1px solid gray;
+    border-top: 1px solid white;
     padding: 1rem;
     padding-left: 2rem;
 

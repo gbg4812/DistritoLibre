@@ -1,8 +1,5 @@
 <script setup>
-// import ContentView from "./components/ContentView.vue";
 import NavBar from "./components/NavBar.vue";
-import { store } from "./store.js";
-import { selectionStage } from "./constants.js";
 </script>
 
 <template>
@@ -17,6 +14,12 @@ import { selectionStage } from "./constants.js";
     --hover-color: #3a3d3b;
     --background-color: #111211;
 }
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
 #app {
     font-family: "DM Sans", sans-serif;
     -webkit-font-smoothing: antialiased;

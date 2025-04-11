@@ -9,7 +9,7 @@ const routes = [
     { path: "/", component: PlanesMap },
     { path: "/sections", component: SectionMap },
     { path: "/buildings", component: BuildingsMaps },
-    { path: "/buildings/:name", component: ContentView },
+    { path: "/posts", component: ContentView },
 ];
 
 const router = createRouter({
