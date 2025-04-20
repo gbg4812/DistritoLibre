@@ -1,5 +1,6 @@
 <script setup>
 import PostCard from "./PostCard.vue";
+import { store } from "../store";
 import { ref } from "vue";
 
 const posts = ref(null);
@@ -24,6 +25,7 @@ async function fetchBooks() {
 <template>
     <div v-if="posts" class="posts-container">
         <PostCard v-for="post in posts" :key="post.id" :post="post" />
+        <h1>{{ store.tags }}</h1>
     </div>
 </template>
 

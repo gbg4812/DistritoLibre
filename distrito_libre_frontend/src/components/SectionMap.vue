@@ -6,7 +6,8 @@ import { politicalMap } from "../constants";
 import router from "../router";
 
 const nextStep = (id) => {
-    store.section = id;
+    console.log("Clicked " + id);
+    store.tags.push(id);
     router.push("/buildings");
 };
 </script>
@@ -21,7 +22,7 @@ const nextStep = (id) => {
                 or
                 :url="`./assets/sectors/sectors.${index}.svg`"
                 :name="politicalMap[store.plane][index - 1]"
-                @svg-click="nextStep(id)"
+                @svg-click="nextStep"
             />
         </SvgContainer>
     </div>

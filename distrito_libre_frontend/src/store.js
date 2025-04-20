@@ -1,8 +1,8 @@
 import { reactive } from "vue";
-import { selectionStage } from "./constants";
+import { selectionStage, Planes } from "./constants";
 
 export const store = reactive({
     sel_stage: selectionStage.PLANE,
-    plane: "",
-    section: "",
+    plane: Planes.CENTER,
+    tags: [],
 });

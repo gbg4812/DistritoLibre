@@ -2,12 +2,14 @@
 import router from "../router";
 import ContentMenu from "./ContentMenu.vue";
 import { RouterLink } from "vue-router";
+defineEmits(["login-start"]);
 </script>
 
 <template>
     <div class="nav-container">
         <RouterLink to="/">Distrito Libre</RouterLink>
         <h2>{{ router.currentRoute.value.fullPath }}</h2>
+        <button @click="$emit('login-start')">Login</button>
         <ContentMenu></ContentMenu>
     </div>
 </template>

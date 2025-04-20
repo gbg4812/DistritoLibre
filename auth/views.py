@@ -1,5 +1,12 @@
-from django.contrib.auth import login, logout, authenticate
-from django.http import HttpRequest, HttpResponseBadRequest, HttpResponseRedirect
+from django.contrib.auth import login, authenticate, logout
+from django.http import (
+    HttpRequest,
+    HttpResponseBadRequest,
+    HttpResponseForbidden,
+    JsonResponse,
+)
+from django.http.response import HttpResponseNotAllowed
+from .serializers import UserSrializer
 # Create your views here.
 
 
@@ -7,9 +14,17 @@ def login_view(request: HttpRequest):
     username = request.POST["username"]
     password = request.POST["password"]
 
+    print(username)
+    print(password)
+
     user = authenticate(request, password=password, username=username)
-    if user != None:
+    if user is not None:
         login(request, user)
-        return HttpResponseRedirect("/")
+        serializer = UserSrializer(user)
+        return JsonResponse(serializer.data)
     else:
-        return HttpResponseBadRequest()
+        return HttpResponseForbidden()
+
+
+def logout_view(request: HttpRequest):
+    logout(request)

@@ -1,9 +1,13 @@
 <script setup>
+import { ref } from "vue";
 import NavBar from "./components/NavBar.vue";
+import LoginPopup from "./components/LoginPopup.vue";
+const loginpopup = ref(false);
 </script>
 
 <template>
-    <NavBar />
+    <NavBar @login-start="loginpopup = true" />
+    <LoginPopup v-if="loginpopup" @loged-in="loginpopup = false"></LoginPopup>
     <div class="content">
         <RouterView />
     </div>

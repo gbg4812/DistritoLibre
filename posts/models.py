@@ -8,41 +8,26 @@ def get_anonymus_user():
     return User.objects.get_or_create(username="anonymus")[0].id
 
 
-class Sections(models.TextChoices):
-    ANARQUISMOCRISTIANO = "ANARQUISMOCRISTIANO"
-    COMUNALISMOTRADICIONALISTA = "COMUNALISMOTRADICIONALISTA"
-    PAELOLIBERTARISMO = "PAELOLIBERTARISMO"
-    SOCIALISMOCRISTIANO = "SOCIALISMOCRISTIANO"
-    LIBERALISMOCONSERVADOR = "LIBERALISMOCONSERVADOR"
-    NACIONALBOLCHEVISMO = "NACIONALBOLCHEVISMO"
-    FASCISMOCLERICAL = "FASCISMOCLERICAL"
-    NEOREACCIONNRX = "NEOREACCIONNRX"
-    ANARCOCOMUNISMO = "ANARCOCOMUNISMO"
-    MUTUALISMO = "MUTUALISMO"
-    LIBERTARISMO = "LIBERTARISMO"
-    SOCIALISMODEMOCRATICO = "SOCIALISMODEMOCRATICO"
-    LIBERALISMOCLASICO = "LIBERALISMOCLASICO"
-    MARXISMOLENINISMO = "MARXISMOLENINISMO"
-    FASCISMOCLASICO = "FASCISMOCLASICO"
-    CAPITALISMOILIBERAL = "CAPITALISMOILIBERAL"
-    POSANARQUISMO = "POSANARQUISMO"
-    ANARQUISMOEGOISTA = "ANARQUISMOEGOISTA"
-    IZQUIERDALIBERTARIA = "IZQUIERDALIBERTARIA"
-    LUXEMBURGISMO = "LUXEMBURGISMO"
-    COMUNISMOPOSMARXISTA = "COMUNISMOPOSMARXISTA"
-    SOCIOLIBERALISMO = "SOCIOLIBERALISMO"
-    TECNOCRACIAPROGRESISTA = "TECNOCRACIAPROGRESISTA"
-    JACOBINISMO = "JACOBINISMO"
-    NOSECTION = "NOSECTION"
+class Tag(models.Model):
+    name = models.CharField(max_length=64, primary_key=True)
+
+
+class SubTagEdifici(models.Model):
+    name = models.CharField(max_length=64, primary_key=True)
+
+
+class TagSeccio(models.Model):
+    name = models.OneToOneField(Tag, on_delete=models.CASCADE, primary_key=True)
+    edificis = models.ManyToManyField(SubTagEdifici)
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=64, primary_key=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, default=get_anonymus_user
     )
-    section = models.CharField(
-        max_length=50, choices=Sections, default=Sections.NOSECTION
-    )
+    tags = models.ManyToManyField(Tag)
+    edificis = models.ManyToManyField(SubTagEdifici)
+
     content = models.CharField(max_length=1000, blank=True)
-    coverimg = models.URLField(blank=True)
+    icon = models.URLField(blank=True)
