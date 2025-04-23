@@ -1,13 +1,9 @@
 <script setup>
-import { ref } from "vue";
 import NavBar from "./components/NavBar.vue";
-import LoginPopup from "./components/LoginPopup.vue";
-const loginpopup = ref(false);
 </script>
 
 <template>
-    <NavBar @login-start="loginpopup = true" />
-    <LoginPopup v-if="loginpopup" @loged-in="loginpopup = false"></LoginPopup>
+    <NavBar />
     <div class="content">
         <RouterView />
     </div>
@@ -15,13 +11,54 @@ const loginpopup = ref(false);
 
 <style>
 :root {
-    --hover-color: #3a3d3b;
-    --background-color: #111211;
+    --color-black: #000000ff;
+    --color-gray: #d1d1d1ff;
+    --color-white: #ffffffff;
+    --color-light-cream: #f1efecff;
+    --color-cream: #d4c9beff;
+    --color-sea-blue: #123458ff;
+    --color-bluish-dark: #030303ff;
+
+    --pixel-border: 1px solid black;
 }
 
 * {
     margin: 0px;
-    padding: 0px;
+}
+
+input,
+button {
+    font-size: 1rem;
+    border: var(--pixel-border);
+    border-radius: 0px;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    padding: 1rem;
+}
+
+label,
+p,
+a {
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+a,
+.clickable {
+    cursor: pointer;
+}
+
+a:hover,
+.clickable:hover {
+    color: var(--color-light-cream);
+}
+
+button:hover {
+    background-color: var(--color-light-cream);
+}
+
+input:focus {
+    outline: 1px solid var(--color-sea-blue);
 }
 
 #app {
@@ -33,9 +70,11 @@ const loginpopup = ref(false);
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-    color: #2c3e50;
+    color: var(--color-black);
 }
+</style>
 
+<style scoped>
 .content {
     display: flex;
     flex-direction: column;

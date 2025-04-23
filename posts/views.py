@@ -6,7 +6,7 @@ from django.http import (
     HttpResponse,
 )
 
-from .models import Post
+from .models import Post, SubTagEdifici, Tag
 from django.contrib.auth.models import User
 from .serializers import PostsSerializer
 
@@ -16,8 +16,7 @@ def post_list(request: HttpRequest) -> HttpResponse:
         tags = request.GET.getlist("tag")
 
         posts = Post.objects.all()
-        for tag in tags:
-            posts = posts.filter(tags__name=tag)
+        posts = posts.filter(tags__name__in=tags)
 
         serializer = PostsSerializer(posts, many=True)
         return JsonResponse(serializer.data, safe=False)
@@ -33,6 +32,13 @@ def user_posts(request: HttpRequest, userid: int):
     else:
         data = {"posts": list(Post.objects.all().filter(author__id=userid).values())}
         return JsonResponse(data)
+
+
+def buildings_view(request):
+    if request.method == "GET":
+        tag = request.GET["tag"]
+        edificis = list(SubTagEdifici.objects.filter(tagseccio__name=tag).values())
+        return JsonResponse({"buildings": edificis})
 
 
 def new_post(request: HttpRequest):

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 def get_anonymus_user():
-    return User.objects.get_or_create(username="anonymus")[0].id
+    return User.objects.get_or_create(username="anonymus")[0]
 
 
 class Tag(models.Model):
@@ -16,8 +16,7 @@ class SubTagEdifici(models.Model):
     name = models.CharField(max_length=64, primary_key=True)
 
 
-class TagSeccio(models.Model):
-    name = models.OneToOneField(Tag, on_delete=models.CASCADE, primary_key=True)
+class TagSeccio(Tag):
     edificis = models.ManyToManyField(SubTagEdifici)
 
 

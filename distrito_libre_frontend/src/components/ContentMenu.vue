@@ -5,10 +5,13 @@ const show_menu = ref(false);
 </script>
 
 <template>
-    <div id="wraper">
-        <!-- we need the item before the content to ocupi all the space -->
-        <h3 id="title" @mouseenter="show_menu = true">Menu</h3>
-        <div v-if="show_menu" id="content" @mouseleave="show_menu = false">
+    <div
+        id="wraper"
+        @mouseenter="show_menu = true"
+        @mouseleave="show_menu = false"
+    >
+        <h3 id="title" class="clickable">Menu</h3>
+        <div v-if="show_menu" id="content">
             <a>Categories</a>
             <a>About Us</a>
             <a>Policy</a>
@@ -42,22 +45,14 @@ const show_menu = ref(false);
     box-sizing: border-box;
     border-top: 1px solid white;
     padding: 1rem;
-    padding-left: 2rem;
 
     background: black;
 }
 
 a {
-    font-size: 1rem;
     min-width: 10rem;
     padding: 0.5em;
     padding-left: 1em;
     text-align: left;
-    transition: 0.3s;
-}
-
-a:hover {
-    color: var(--hover-color);
-    cursor: pointer;
 }
 </style>

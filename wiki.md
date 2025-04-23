@@ -1,0 +1,140 @@
+# Wiki
+
+<!--toc:start-->
+
+- [Wiki](#wiki)
+  - [API](#api)
+    - [Urls Overview](#urls-overview)
+    - [Posts](#posts)
+      - [Get list of posts (title, author, icon, firstlines) containing tag _tag name_, section tag _stag name_ and building tag _btag name_](#get-list-of-posts-title-author-icon-firstlines-containing-tag-tag-name-section-tag-stag-name-and-building-tag-btag-name)
+      - [Get a particular post (title, author, icon, content, stags, btags, tags)](#get-a-particular-post-title-author-icon-content-stags-btags-tags)
+      - [Get a list of btags for the stag, btags (name, icon)](#get-a-list-of-btags-for-the-stag-btags-name-icon)
+      - [Post new post (title, author, icon, content (file), stags, btags, tags)](#post-new-post-title-author-icon-content-file-stags-btags-tags)
+      - [Delete post (title)](#delete-post-title)
+    - [Auth](#auth)
+  - [Usage Stories](#usage-stories) - [Playful exploration of posts](#playful-exploration-of-posts) - [Search of post](#search-of-post) - [Login](#login) - [Logout](#logout) - [New Post](#new-post)
+  <!--toc:end-->
+
+## API
+
+### Urls Overview
+
+- /posts/\* # urls realted to posts
+- /auth/\* # urls realted to auth
+
+### Posts
+
+#### Get list of posts (title, author, icon, firstlines) containing tag _tag name_, section tag _stag name_ and building tag _btag name_
+
+| Url      | /posts/?tag=_tag name_?stag=_stag name_?btag=_btag name_ |
+| -------- | -------------------------------------------------------- |
+| response | PostOverviewList                                         |
+
+```ts
+interface PostOverview = {
+    title: string;
+    author: {
+        username: string;
+    };
+    icon: URL;
+    description: string;
+    tags : [index : number] : string;
+};
+
+interface PostOverviewList = {
+    [index: number]: PostOverview;
+};
+```
+
+#### Get a particular post (title, author, icon, content, stags, btags, tags)
+
+| Url      | /posts/\<str : title\>/ - /posts/ |
+| -------- | --------------------------------- |
+| response | Post                              |
+
+```ts
+interface Post {
+    title: string;
+    author: {
+        username: string;
+    };
+    icon: URL;
+    content: string;
+    tags : [index : number] : string;
+};
+```
+
+#### Get a list of btags for the stag, btags (name, icon)
+
+Gets the list of btags that apear in at least one post with the stag
+
+| Url      | /posts/btags/\<str : stag\>/ |
+| -------- | ---------------------------- |
+| response | BTagList                     |
+
+```ts
+interface Tag {
+  name: string;
+}
+
+interface BTag extends Tag {
+  icon: URL;
+}
+
+interface BTagList {
+  [index: number]: BTag;
+}
+```
+
+#### Post new post (title, author, icon, content (file), stags, btags, tags)
+
+| Url      | /posts/new/   |
+| -------- | ------------- |
+| response | StateResponse |
+
+```ts
+interface StateResponse {
+  state: number;
+  message?: string;
+}
+```
+
+#### Delete post (title)
+
+| Url      | /posts/delete/\<str : title\>/ |
+| -------- | ------------------------------ |
+| response | StateResponse                  |
+
+### Auth
+
+- /auth/login/
+- /auth/logout/
+- set and get user info
+  - /auth/userinfo/
+
+## Usage Stories
+
+### Playful exploration of posts
+
+1.
+2.
+
+### Search of post
+
+1.
+2.
+
+### Login
+
+1.
+2.
+
+### Logout
+
+1.
+2.
+
+### New Post
+
+1.
+2.

@@ -12,7 +12,7 @@ const props = defineProps({
 <template>
     <div v-if="props.post" class="post-container">
         <div class="coverimg-container">
-            <Icon :icon="props.post.coverimg" />
+            <Icon :icon="props.post.icon" />
         </div>
         <div class="article-container">
             <h1 class="title">{{ props.post.title }}</h1>

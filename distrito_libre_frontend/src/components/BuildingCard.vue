@@ -21,6 +21,7 @@ const props = defineProps({
     padding: 2em;
     border: 1px solid black;
     box-shadow: 5px 5px black;
+    aspect-ratio: 1;
 }
 img {
     width: 10rem;

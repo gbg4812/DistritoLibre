@@ -1,3 +1,5 @@
+export const APIBASEURL = new URL("http://127.0.0.1:8000/");
+
 export const Planes = {
     CENTER_RIGHT: "CENTER_RIGHT",
     CENTER: "CENTER",
@@ -35,10 +37,4 @@ export const politicalMap = {
         "TECNOCRACIAPROGRESISTA",
         "JACOBINISMO",
     ],
-};
-
-export const selectionStage = {
-    PLANE: "PLANE",
-    SECTION: "SECTION",
-    BUILDING: "BUILDING",
 };
