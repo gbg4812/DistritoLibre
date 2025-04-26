@@ -12,21 +12,13 @@ class Tag(models.Model):
     name = models.CharField(max_length=64, primary_key=True)
 
 
-class SubTagEdifici(models.Model):
-    name = models.CharField(max_length=64, primary_key=True)
-
-
-class TagSeccio(Tag):
-    edificis = models.ManyToManyField(SubTagEdifici)
-
-
 class Post(models.Model):
     title = models.CharField(max_length=64, primary_key=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, default=get_anonymus_user
     )
+
     tags = models.ManyToManyField(Tag)
-    edificis = models.ManyToManyField(SubTagEdifici)
 
     content = models.CharField(max_length=1000, blank=True)
     icon = models.URLField(blank=True)

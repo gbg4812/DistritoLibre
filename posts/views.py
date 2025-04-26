@@ -6,7 +6,7 @@ from django.http import (
     HttpResponse,
 )
 
-from .models import Post, SubTagEdifici, Tag
+from .models import Post, Tag
 from django.contrib.auth.models import User
 from .serializers import PostsSerializer
 
@@ -37,7 +37,7 @@ def user_posts(request: HttpRequest, userid: int):
 def buildings_view(request):
     if request.method == "GET":
         tag = request.GET["tag"]
-        edificis = list(SubTagEdifici.objects.filter(tagseccio__name=tag).values())
+        edificis = list()
         return JsonResponse({"buildings": edificis})
 
 

@@ -8,8 +8,8 @@
     - [Posts](#posts)
       - [Get list of posts (title, author, icon, firstlines) containing tag _tag name_, section tag _stag name_ and building tag _btag name_](#get-list-of-posts-title-author-icon-firstlines-containing-tag-tag-name-section-tag-stag-name-and-building-tag-btag-name)
       - [Get a particular post (title, author, icon, content, stags, btags, tags)](#get-a-particular-post-title-author-icon-content-stags-btags-tags)
-      - [Get a list of btags for the stag, btags (name, icon)](#get-a-list-of-btags-for-the-stag-btags-name-icon)
-      - [Post new post (title, author, icon, content (file), stags, btags, tags)](#post-new-post-title-author-icon-content-file-stags-btags-tags)
+      - [Get a list of btags for the stag](#get-a-list-of-btags-for-the-stag)
+      - [Post new post (title, author, icon, content (file), tags)](#post-new-post-title-author-icon-content-file-tags)
       - [Delete post (title)](#delete-post-title)
     - [Auth](#auth)
   - [Usage Stories](#usage-stories) - [Playful exploration of posts](#playful-exploration-of-posts) - [Search of post](#search-of-post) - [Login](#login) - [Logout](#logout) - [New Post](#new-post)
@@ -64,7 +64,7 @@ interface Post {
 };
 ```
 
-#### Get a list of btags for the stag, btags (name, icon)
+#### Get a list of btags for the stag
 
 Gets the list of btags that apear in at least one post with the stag
 
@@ -86,11 +86,15 @@ interface BTagList {
 }
 ```
 
-#### Post new post (title, author, icon, content (file), stags, btags, tags)
+#### Post new post (title, author, icon, content (file), tags)
 
 | Url      | /posts/new/   |
 | -------- | ------------- |
+| request  | Post          |
 | response | StateResponse |
+| auth     | required      |
+
+[!NOTE] The the authenticated user must be the author
 
 ```ts
 interface StateResponse {
@@ -99,18 +103,55 @@ interface StateResponse {
 }
 ```
 
+| State Code | Meaning               |
+| ---------- | --------------------- |
+| 0          | Operation Successful  |
+| 1          | Alternative operation |
+| 2          | Bad Data              |
+| 3          | Operation failure     |
+
 #### Delete post (title)
 
 | Url      | /posts/delete/\<str : title\>/ |
 | -------- | ------------------------------ |
 | response | StateResponse                  |
+| auth     | required                       |
 
 ### Auth
 
-- /auth/login/
-- /auth/logout/
-- set and get user info
-  - /auth/userinfo/
+#### Initiate login session
+
+| Url      | /auth/login/    |
+| -------- | --------------- |
+| request  | UserCredentials |
+| response | StateResponse   |
+
+```ts
+interface UserCredentials {
+  username: string;
+  password: string;
+}
+```
+
+#### Logout User
+
+| Url      | /auth/logout/ |
+| -------- | ------------- |
+| response | StateResponse |
+
+#### Set and get user info
+
+| Url              | /auth/userinfo/ |
+| ---------------- | --------------- |
+| response/request | UserInfo        |
+
+```ts
+interface UserInfo {
+  username: string;
+  password: string;
+  email: string;
+}
+```
 
 ## Usage Stories
 
