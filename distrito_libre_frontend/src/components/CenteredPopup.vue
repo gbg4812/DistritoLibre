@@ -5,7 +5,7 @@ defineEmits(["close"]);
 <template>
     <div id="wraper">
         <div id="content">
-            <button type="button" @click="$emit('close')">X</button>
+            <button type="button" @click="$emit('close')">Close</button>
             <slot></slot>
         </div>
     </div>

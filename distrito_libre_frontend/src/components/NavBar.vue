@@ -18,7 +18,7 @@ function loginHandler(name) {
 </script>
 
 <template>
-    <div class="nav-container">
+    <div class="nav-container white-text">
         <RouterLink to="/">Distrito Libre</RouterLink>
 
         <h3>{{ router.currentRoute.value.fullPath }}</h3>
@@ -56,8 +56,6 @@ function loginHandler(name) {
     z-index: 1;
     box-sizing: border-box;
 
-    color: white;
-    background: black;
     border: 1px solid white;
 }
 

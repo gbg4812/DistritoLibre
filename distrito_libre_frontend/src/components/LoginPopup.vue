@@ -19,13 +19,20 @@ function login() {
 <template>
     <div>
         <form id="login-form">
-            <label for="username">Username: </label>
+            <label for="username" class="black-text">Username: </label>
             <input type="text" name="username" />
 
-            <label for="password">Password: </label>
+            <label for="password" class="black-text">Password: </label>
             <input type="password" name="password" />
 
-            <button id="login-bttn" type="button" @click="login">Login</button>
+            <button
+                id="login-bttn"
+                class="white-text"
+                type="button"
+                @click="login"
+            >
+                Login
+            </button>
         </form>
     </div>
 </template>
@@ -35,5 +42,9 @@ form {
     display: flex;
     flex-direction: column;
     padding: 10%;
+}
+
+button {
+    margin-top: 1rem;
 }
 </style>
