@@ -1,9 +1,11 @@
 <script setup>
-import SvgComponent from "./SvgComponent.vue";
-import SvgContainer from "./SvgContainer.vue";
+import SvgComponent from "./reusable/SvgComponent.vue";
+import SvgContainer from "./reusable/SvgContainer.vue";
 import { Planes } from "../constants.js";
 import { store } from "../store";
-import router from "../router.js";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 function setPlane(plane) {
     store.plane = plane;
@@ -12,7 +14,9 @@ function setPlane(plane) {
 </script>
 
 <template>
-    <div>
+    <div id="cont">
+        <h1>Distrito Libre</h1>
+        <h2>Explore Your Convictions</h2>
         <SvgContainer>
             <SvgComponent
                 url="assets/planes.0.svg"
@@ -30,4 +34,15 @@ function setPlane(plane) {
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+h1 {
+    font-size: 4rem;
+    padding: 2rem;
+}
+#cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+</style>

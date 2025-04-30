@@ -1,13 +1,21 @@
 <script setup>
+import { Icon } from "@iconify/vue/dist/iconify.js";
 const props = defineProps({
-    svgImg: URL,
-    name: String,
+    icon: {
+        type: String,
+        required: true,
+    },
+
+    name: {
+        type: String,
+        required: true,
+    },
 });
 </script>
 
 <template>
     <div id="cont">
-        <img :src="props.svgImg" alt="building image" />
+        <Icon :icon="props.icon" width="10rem" />
         <h3>{{ props.name }}</h3>
     </div>
 </template>
@@ -22,9 +30,6 @@ const props = defineProps({
     border: 1px solid black;
     box-shadow: 5px 5px black;
     aspect-ratio: 1;
-}
-img {
-    width: 10rem;
 }
 
 #cont:hover {

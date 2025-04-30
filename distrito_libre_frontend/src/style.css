@@ -6,20 +6,41 @@
     --color-cream: #d4c9beff;
     --color-sea-blue: #123458ff;
     --color-bluish-dark: #030303ff;
-
     --pixel-border: 1px solid black;
 }
 
 * {
     margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
     font-family: "DM Sans", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-optical-sizing: auto;
-    font-weight: 400;
     font-style: normal;
-    text-align: center;
-    color: var(--color-black);
+}
+
+label,
+p,
+a,
+input,
+button,
+.text-s {
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+h2,
+h3,
+.text-m {
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+h1,
+.text-l {
+    font-weight: 800;
+    font-size: 2rem;
 }
 
 .black-text {
@@ -29,12 +50,11 @@
 
 .white-text {
     color: var(--color-white);
-    background-color: var(--color-balck);
+    background-color: var(--color-black);
 }
 
 input,
 button {
-    font-size: 1rem;
     border: var(--pixel-border);
     border-radius: 0px;
     padding: 1rem;
@@ -45,26 +65,28 @@ input:focus {
 }
 
 button.black-text:hover {
-    background-color: var(--color-sea-blue);
-}
-
-button.white-text:hover {
     background-color: var(--color-cream);
 }
 
-label,
-p,
-a {
-    font-size: 1rem;
-    text-decoration: none;
+button.white-text:hover {
+    background-color: var(--color-sea-blue);
 }
 
 a,
 .clickable {
     cursor: pointer;
+    text-decoration: none;
 }
 
-a:hover,
 .clickable:hover {
-    color: var(--color-light-cream);
+    color: var(--color-cream);
+}
+
+a.black-text:hover,
+.clickable.black-text:hover {
+    color: var(--color-sea-blue);
+}
+
+a {
+    color: inherit;
 }

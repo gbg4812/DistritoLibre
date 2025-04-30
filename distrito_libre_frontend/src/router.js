@@ -21,7 +21,7 @@ const routes = [
             store.tags = [];
         },
     },
-    { path: "/buildings", component: BuildingsMaps },
+    { path: "/sections/buildings", component: BuildingsMaps },
     { path: "/posts", component: ContentView },
 ];
 

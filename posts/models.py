@@ -12,6 +12,10 @@ class Tag(models.Model):
     name = models.CharField(max_length=64, primary_key=True)
 
 
+class TagBuilding(Tag):
+    icon = models.CharField(max_length=128, blank=True)
+
+
 class Post(models.Model):
     title = models.CharField(max_length=64, primary_key=True)
     author = models.ForeignKey(
@@ -21,4 +25,4 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag)
 
     content = models.CharField(max_length=1000, blank=True)
-    icon = models.URLField(blank=True)
+    icon = models.CharField(max_length=128, blank=True)

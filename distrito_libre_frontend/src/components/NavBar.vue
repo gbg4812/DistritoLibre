@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from "vue";
-import router from "../router";
 import ContentMenu from "./ContentMenu.vue";
 import { RouterLink } from "vue-router";
 import LoginPopup from "./LoginPopup.vue";
 import { store } from "../store";
-import CenteredPopup from "./CenteredPopup.vue";
+import CenteredPopup from "./reusable/CenteredPopup.vue";
+import PathNavigation from "./PathNavigation.vue";
 
 const loginpopup = ref(false);
 const username = ref("");
@@ -19,9 +19,9 @@ function loginHandler(name) {
 
 <template>
     <div class="nav-container white-text">
-        <RouterLink to="/">Distrito Libre</RouterLink>
+        <RouterLink class="text-l" to="/">Distrito Libre</RouterLink>
 
-        <h3>{{ router.currentRoute.value.fullPath }}</h3>
+        <PathNavigation />
 
         <span></span>
 
@@ -32,12 +32,14 @@ function loginHandler(name) {
         >
             {{ username }}
         </h3>
+
         <h3 v-else class="clickable" @click="loginpopup = true">Login</h3>
+
         <CenteredPopup v-if="loginpopup" @close="loginpopup = false">
             <LoginPopup @loged-in="loginHandler"></LoginPopup>
         </CenteredPopup>
 
-        <ContentMenu></ContentMenu>
+        <ContentMenu />
     </div>
 </template>
 
@@ -48,10 +50,10 @@ function loginHandler(name) {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
 
     width: 100%;
     height: 4rem;
-    position: fixed;
     top: 0px;
     z-index: 1;
     box-sizing: border-box;
@@ -60,9 +62,6 @@ function loginHandler(name) {
 }
 
 .nav-container a {
-    font-size: 2em;
-    color: white;
-    font-weight: 800;
     margin-left: 1rem;
     margin-right: 1rem;
 }

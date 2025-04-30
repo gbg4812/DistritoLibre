@@ -24,7 +24,7 @@ urlpatterns = [
         include("posts.urls"),
     ),
     path(
-        "login/",
+        "auth/",
         include("auth.urls"),
     ),
 ]

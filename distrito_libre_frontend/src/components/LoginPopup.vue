@@ -5,7 +5,8 @@ const emit = defineEmits(["loged-in"]);
 function login() {
     const form = document.querySelector<HTMLFormElement>("#login-form");
     const data = new FormData(form);
-    fetch(APIBASEURL.href + "login/", { method: "post", body: data })
+    const url = new URL("/auth/login/", APIBASEURL);
+    fetch(url, { method: "post", body: data })
         .then((response) => {
             return response.json();
         })
@@ -44,7 +45,8 @@ form {
     padding: 10%;
 }
 
-button {
+button,
+label {
     margin-top: 1rem;
 }
 </style>

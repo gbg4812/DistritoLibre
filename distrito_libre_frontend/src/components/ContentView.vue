@@ -6,9 +6,7 @@ import { APIBASEURL } from "../constants";
 
 const posts = ref(null);
 
-fetchBooks();
-
-async function fetchBooks() {
+async function fetchPosts() {
     try {
         const reqUrl = new URL("posts/", APIBASEURL);
         for (const tag of store.tags) {
@@ -25,20 +23,45 @@ async function fetchBooks() {
         console.error("Problem fetching the Post!", error);
     }
 }
+
+fetchPosts();
 </script>
 
 <template>
-    <div v-if="posts" class="posts-container">
-        <PostCard v-for="post in posts" :key="post.title" :post="post" />
+    <div v-if="posts" id="posts-cont">
+        <div id="tags-cont">
+            <a v-for="tag in store.tags" :key="tag">{{ tag }}</a>
+        </div>
+        <RouterLink
+            v-for="post in posts"
+            :key="post.title"
+            :to="'/posts/' + post.title"
+        >
+            <PostCard :post="post"></PostCard>
+        </RouterLink>
     </div>
 </template>
 
 <style scoped>
-.posts-container {
+#posts-cont {
     display: flex;
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
     padding: 1rem;
+}
+#tags-cont {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    overflow: clip;
+}
+
+#tags-cont a {
+    background-color: var(--color-sea-blue);
+    border: 5px solid var(--color-sea-blue);
+    border-radius: 5px;
+    color: var(--color-white);
+    margin: 0.5rem;
 }
 </style>

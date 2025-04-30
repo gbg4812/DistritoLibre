@@ -4,8 +4,10 @@ defineEmits(["close"]);
 
 <template>
     <div id="wraper">
-        <div id="content">
-            <button type="button" @click="$emit('close')">Close</button>
+        <div id="content" class="black-text">
+            <button class="white-text" type="button" @click="$emit('close')">
+                Close
+            </button>
             <slot></slot>
         </div>
     </div>
@@ -25,7 +27,6 @@ defineEmits(["close"]);
     margin: 10%;
     flex-direction: column;
     border: var(--pixel-border);
-    background-color: var(--color-white);
     z-index: 2;
 }
 

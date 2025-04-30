@@ -1,19 +1,20 @@
 <script setup>
-import SvgComponent from "./SvgComponent.vue";
-import SvgContainer from "./SvgContainer.vue";
+import SvgComponent from "./reusable/SvgComponent.vue";
+import SvgContainer from "./reusable/SvgContainer.vue";
 import { store } from "../store";
 import { politicalMap } from "../constants";
-import router from "../router";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const nextStep = (id) => {
     console.log("Clicked " + id);
     store.tags.push(id);
-    router.push("/buildings");
+    router.push("sections/buildings");
 };
 </script>
 
 <template>
-    <div>
+    <div id="secmap">
         <SvgContainer id="svgcont" viewBox="0 0 1920 1080">
             <SvgComponent url="./assets/sectors/sectors.context.svg" />
             <SvgComponent
@@ -31,5 +32,9 @@ const nextStep = (id) => {
 <style scoped>
 #svgcont {
     height: calc(100vh - 4rem);
+}
+
+#secmap {
+    align-self: center;
 }
 </style>
