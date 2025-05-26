@@ -8,7 +8,9 @@ defineEmits(["close"]);
             <button class="white-text" type="button" @click="$emit('close')">
                 Close
             </button>
-            <slot></slot>
+            <div id="customcont">
+                <slot></slot>
+            </div>
         </div>
     </div>
 </template>
@@ -16,8 +18,8 @@ defineEmits(["close"]);
 <style scoped>
 #wraper {
     position: fixed;
-    top: 4rem;
     left: 0%;
+    top: 0%;
     width: 100%;
     height: 100%;
     display: flex;
@@ -32,6 +34,10 @@ defineEmits(["close"]);
     display: flex;
     flex-direction: column;
     border: var(--pixel-border);
+}
+
+#customcont {
+    overflow: scroll;
 }
 
 button {

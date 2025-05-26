@@ -1,8 +1,9 @@
-<script setup>
-import { APIBASEURL } from "../constants";
+<script setup lang="ts">
+import Post from "../types.ts";
+import { APIBASEURL } from "../constants.ts";
 import { ref } from "vue";
 
-const newPost = ref({});
+const newPost = ref<Post>({});
 
 const postpost = () => {
     const url = new URL("/api/posts/new/", APIBASEURL);
@@ -32,19 +33,27 @@ const postpost = () => {
 <template>
     <form>
         <label for="title">Title</label>
-        <input v-model="newPost.title" type="text" name="title" />
+        <input v-model="newPost.title" required type="text" name="title" />
         <label for="description">Description</label>
-        <input v-model="newPost.descritpion" type="text" name="description" />
-        <label for="content">Content</label>
         <input
-            v-model="newPost.content"
+            v-model="newPost.descritpion"
+            required
             type="text"
-            aria-multiline="true"
+            name="description"
+        />
+        <label for="content">Content</label>
+        <textarea
+            v-model="newPost.content"
+            required
+            cols="100"
+            rows="10"
+            type="text"
             name="content"
         />
         <label for="icon">Icon</label>
         <input
             v-model="newPost.icon"
+            required
             type="text"
             aria-multiline="true"
             name="icon"
@@ -58,7 +67,9 @@ const postpost = () => {
 form {
     display: flex;
     flex-direction: column;
-    padding: 10%;
+    justify-content: space-around;
+    align-items: stretch;
+    padding: 5%;
 }
 
 h2 {
@@ -68,5 +79,10 @@ h2 {
 button,
 label {
     margin-top: 1rem;
+}
+
+textarea {
+    display: block;
+    resize: none;
 }
 </style>

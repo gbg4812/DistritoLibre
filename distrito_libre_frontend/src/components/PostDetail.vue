@@ -21,7 +21,7 @@ fetch(url, { credentials: "include" })
 <style scoped>
 #content-wrap {
     margin: auto;
-    max-width: 60rem;
+    width: 60rem;
 }
 
 #content-wrap > * {
