@@ -15,7 +15,7 @@ const props = defineProps({
         <div class="article-container">
             <h1 class="title">{{ props.post.title }}</h1>
             <h2 class="subtitle">{{ props.post.author.username }}</h2>
-            <p>{{ props.post.content }}</p>
+            <p>{{ props.post.description }}</p>
         </div>
         <div class="lupa"></div>
         <div class="tags">

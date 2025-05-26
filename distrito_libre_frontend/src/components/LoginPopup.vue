@@ -5,7 +5,7 @@ const emit = defineEmits(["loged-in"]);
 function login() {
     const form = document.querySelector<HTMLFormElement>("#login-form");
     const data = new FormData(form);
-    const url = new URL("/auth/login/", APIBASEURL);
+    const url = new URL("/api/auth/login/", APIBASEURL);
     fetch(url, { method: "post", body: data })
         .then((response) => {
             return response.json();

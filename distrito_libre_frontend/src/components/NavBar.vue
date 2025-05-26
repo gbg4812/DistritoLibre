@@ -3,6 +3,7 @@ import { ref } from "vue";
 import ContentMenu from "./ContentMenu.vue";
 import { RouterLink } from "vue-router";
 import LoginPopup from "./LoginPopup.vue";
+import UserPopup from "./UserPopup.vue";
 import { store } from "../store";
 import CenteredPopup from "./reusable/CenteredPopup.vue";
 import PathNavigation from "./PathNavigation.vue";
@@ -10,6 +11,9 @@ import PathNavigation from "./PathNavigation.vue";
 const loginpopup = ref(false);
 const username = ref("");
 const userpopup = ref(false);
+
+const isSmall = window.innerWidth < 500;
+console.log(window.innerWidth);
 
 function loginHandler(name) {
     loginpopup.value = false;
@@ -21,22 +25,27 @@ function loginHandler(name) {
     <div class="nav-container white-text">
         <RouterLink class="text-l" to="/">Distrito Libre</RouterLink>
 
-        <PathNavigation />
+        <PathNavigation v-if="!isSmall" />
 
         <span></span>
 
-        <h3
-            v-if="store.authenticated"
-            class="clickable"
-            @click="userpopup = true"
-        >
-            {{ username }}
-        </h3>
+        <div v-if="!isSmall">
+            <h3
+                v-if="store.authenticated"
+                class="clickable"
+                @click="userpopup = true"
+            >
+                {{ username }}
+            </h3>
 
-        <h3 v-else class="clickable" @click="loginpopup = true">Login</h3>
+            <h3 v-else class="clickable" @click="loginpopup = true">Login</h3>
+        </div>
 
         <CenteredPopup v-if="loginpopup" @close="loginpopup = false">
             <LoginPopup @loged-in="loginHandler"></LoginPopup>
+        </CenteredPopup>
+        <CenteredPopup v-if="userpopup" @close="userpopup = false">
+            <UserPopup></UserPopup>
         </CenteredPopup>
 
         <ContentMenu />

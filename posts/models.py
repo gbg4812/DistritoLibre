@@ -24,5 +24,6 @@ class Post(models.Model):
 
     tags = models.ManyToManyField(Tag)
 
-    content = models.CharField(max_length=1000, blank=True)
+    description = models.TextField(max_length=400, blank=True)
+    content = models.TextField(max_length=2000, blank=True)
     icon = models.CharField(max_length=128, blank=True)

@@ -53,6 +53,7 @@ h3 {
     justify-content: center;
     height: 100%;
     position: relative;
+    z-index: 1;
 }
 
 #content {

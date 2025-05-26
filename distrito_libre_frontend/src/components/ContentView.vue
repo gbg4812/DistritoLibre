@@ -8,7 +8,7 @@ const posts = ref(null);
 
 async function fetchPosts() {
     try {
-        const reqUrl = new URL("posts/", APIBASEURL);
+        const reqUrl = new URL("/api/posts/", APIBASEURL);
         for (const tag of store.tags) {
             reqUrl.searchParams.append("tag", tag);
         }
@@ -35,7 +35,7 @@ fetchPosts();
         <RouterLink
             v-for="post in posts"
             :key="post.title"
-            :to="'/posts/' + post.title"
+            :to="'/posts/post/' + post.title"
         >
             <PostCard :post="post"></PostCard>
         </RouterLink>

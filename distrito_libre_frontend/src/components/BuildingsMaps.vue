@@ -5,7 +5,7 @@ import { store } from "../store";
 import { ref } from "vue";
 const buildingsWithIcons = ref([]);
 
-const reqUrl = new URL("posts/btags/", APIBASEURL);
+const reqUrl = new URL("/api/posts/btags/", APIBASEURL);
 reqUrl.searchParams.append("tag", store.tags[0]);
 fetch(reqUrl)
     .then((response) => {

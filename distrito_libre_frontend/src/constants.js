@@ -1,4 +1,4 @@
-export const APIBASEURL = new URL("http://127.0.0.1:8000/");
+export const APIBASEURL = new URL("http://localhost:5173");
 
 export const Planes = {
     CENTER_RIGHT: "CENTER_RIGHT",

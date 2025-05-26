@@ -16,18 +16,22 @@ defineEmits(["close"]);
 <style scoped>
 #wraper {
     position: fixed;
-    top: 0%;
+    top: 4rem;
     left: 0%;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(40px);
+    z-index: 1;
 }
 
 #content {
     display: flex;
-    margin: 10%;
     flex-direction: column;
     border: var(--pixel-border);
-    z-index: 2;
 }
 
 button {

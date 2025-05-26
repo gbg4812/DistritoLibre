@@ -5,6 +5,7 @@ import SectionMap from "./components/SectionMap.vue";
 import BuildingsMaps from "./components/BuildingsMaps.vue";
 import ContentView from "./components/ContentView.vue";
 import { store } from "./store";
+import PostDetail from "./components/PostDetail.vue";
 
 const routes = [
     {
@@ -23,6 +24,7 @@ const routes = [
     },
     { path: "/sections/buildings", component: BuildingsMaps },
     { path: "/posts", component: ContentView },
+    { path: "/posts/post/:name", component: PostDetail },
 ];
 
 const router = createRouter({
