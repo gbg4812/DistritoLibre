@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 
 const emit = defineEmits(["svg-click"]);
@@ -15,7 +15,7 @@ const props = defineProps({
     },
 });
 
-let promise = fetch(props.url);
+const promise = fetch(props.url);
 
 const content = ref("");
 
@@ -26,10 +26,11 @@ promise
     })
     .catch(() => console.error("Failed to fetch svg component content!"));
 
-function onClick(event) {
-    if (event.target.id != "svg-cont" && event.target.localName != "svg") {
+function onClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (target.id != "svg-cont" && target.localName != "svg") {
         if (props.name) emit("svg-click", props.name);
-        else emit("svg-click", event.target.id);
+        else emit("svg-click", target.id);
     }
 }
 </script>

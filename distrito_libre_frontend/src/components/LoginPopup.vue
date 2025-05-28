@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { store } from "../store";
+import { store } from "../store.ts";
 import { APIBASEURL } from "../constants";
 const emit = defineEmits(["loged-in"]);
 function login() {
-    const form = document.querySelector<HTMLFormElement>("#login-form");
+    const form = document.querySelector<HTMLFormElement>("#login-form")!;
     const data = new FormData(form);
     const url = new URL("/api/auth/login/", APIBASEURL);
     fetch(url, { method: "post", body: data })

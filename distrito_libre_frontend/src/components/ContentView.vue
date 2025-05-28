@@ -1,10 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import PostCard from "./PostCard.vue";
-import { store } from "../store";
+import { store } from "../store.ts";
 import { ref } from "vue";
-import { APIBASEURL } from "../constants";
+import { APIBASEURL } from "../constants.ts";
+import type { PostOverview } from "../types.ts";
 
-const posts = ref(null);
+const posts = ref<PostOverview[]>();
 
 async function fetchPosts() {
     try {

@@ -1,6 +1,4 @@
-<script setup>
-import { ref } from "vue";
-import { Icon } from "@iconify/vue/dist/iconify.js";
+<script setup lang="ts">
 import DropDownMenu from "./reusable/DropDownMenu.vue";
 </script>
 

@@ -22,25 +22,27 @@ defineEmits(["close"]);
     top: 0%;
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: block;
     backdrop-filter: blur(40px);
+    padding: 4rem;
     z-index: 1;
 }
 
 #content {
-    display: flex;
-    flex-direction: column;
-    border: var(--pixel-border);
+    display: grid;
+    grid-template-rows: 2rem calc(100%-2rem);
+    max-height: 100%;
+    max-width: 100%;
 }
 
 #customcont {
+    grid-row: 2;
+    border: var(--pixel-border);
     overflow: scroll;
 }
 
 button {
+    grid-row: 1;
     align-self: end;
 }
 </style>

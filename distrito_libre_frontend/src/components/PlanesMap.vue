@@ -1,13 +1,13 @@
-<script setup>
+<script setup lang="ts">
 import SvgComponent from "./reusable/SvgComponent.vue";
 import SvgContainer from "./reusable/SvgContainer.vue";
 import { Planes } from "../constants.js";
-import { store } from "../store";
+import { store } from "../store.js";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-function setPlane(plane) {
+function setPlane(plane: string) {
     store.plane = plane;
     router.push("/sections");
 }

@@ -1,8 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import { APIBASEURL } from "../constants";
+import type { UserInfo } from "../types";
 import { ref } from "vue";
 
-const userinfo = ref({});
+const userinfo = ref<UserInfo>({
+    username: "",
+    email: "",
+});
 
 const url = new URL("/api/auth/userinfo/", APIBASEURL);
 fetch(url, {

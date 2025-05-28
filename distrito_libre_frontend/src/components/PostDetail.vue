@@ -1,6 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import { marked } from "marked";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import { APIBASEURL } from "../constants";
 import { ref } from "vue";
 

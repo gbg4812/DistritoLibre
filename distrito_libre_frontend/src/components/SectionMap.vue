@@ -1,13 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import SvgComponent from "./reusable/SvgComponent.vue";
 import SvgContainer from "./reusable/SvgContainer.vue";
-import { store } from "../store";
+import { store } from "../store.ts";
 import { politicalMap } from "../constants";
 import { useRouter } from "vue-router";
 const router = useRouter();
 
-const nextStep = (id) => {
-    console.log("Clicked " + id);
+const nextStep = (id: string) => {
     store.tags.push(id);
     router.push("sections/buildings");
 };

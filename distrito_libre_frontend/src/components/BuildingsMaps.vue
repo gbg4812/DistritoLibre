@@ -1,9 +1,12 @@
-<script setup>
-import BuildingCard from "./BuildingCard.vue";
+<script setup lang="ts">
 import { APIBASEURL } from "../constants";
-import { store } from "../store";
+import { store } from "../store.ts";
 import { ref } from "vue";
-const buildingsWithIcons = ref([]);
+import type { BTag } from "../types.ts";
+
+import BuildingCard from "./BuildingCard.vue";
+
+const buildingsWithIcons = ref<BTag[]>([]);
 
 const reqUrl = new URL("/api/posts/btags/", APIBASEURL);
 reqUrl.searchParams.append("tag", store.tags[0]);

@@ -1,7 +1,3 @@
-export interface TagList {
-    [index: number]: string;
-}
-
 export interface PostOverview {
     title: string;
     author: {
@@ -9,22 +5,18 @@ export interface PostOverview {
     };
     icon: string;
     description: string;
-    tags: TagList;
-}
-
-export interface PostOverviewList {
-    [index: number]: PostOverview;
+    tags: Tag[];
 }
 
 export interface Post {
     title: string;
-    author: {
+    author?: {
         username: string;
     };
     icon: string;
     description: string;
     content: string;
-    tags: TagList;
+    tags: Tag[];
 }
 
 export interface Tag {
@@ -32,11 +24,7 @@ export interface Tag {
 }
 
 export interface BTag extends Tag {
-    icon: URL;
-}
-
-export interface BTagList {
-    [index: number]: BTag;
+    icon: string;
 }
 
 export interface StateResponse {
@@ -51,6 +39,6 @@ export interface UserCredentials {
 
 export interface UserInfo {
     username: string;
-    password: string;
+    password?: string;
     email: string;
 }

@@ -1,12 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import { Icon } from "@iconify/vue";
+import type { PostOverview } from "../types.ts";
 
-const props = defineProps({
-    post: {
-        required: true,
-        type: Object,
-    },
-});
+const props = defineProps<{
+    post: PostOverview;
+}>();
 </script>
 
 <template>
@@ -14,12 +12,14 @@ const props = defineProps({
         <Icon class="coverimg-container" :icon="props.post.icon" width="none" />
         <div class="article-container">
             <h1 class="title">{{ props.post.title }}</h1>
-            <h2 class="subtitle">{{ props.post.author.username }}</h2>
+            <h2 v-if="props.post.author" class="subtitle">
+                {{ props.post.author.username }}
+            </h2>
             <p>{{ props.post.description }}</p>
         </div>
         <div class="lupa"></div>
         <div class="tags">
-            <a v-for="tag of props.post.tags" :key="tag">{{ tag }}</a>
+            <a v-for="tag of props.post.tags" :key="tag.name">{{ tag }}</a>
         </div>
     </div>
 </template>

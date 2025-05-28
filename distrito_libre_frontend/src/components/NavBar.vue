@@ -1,10 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import ContentMenu from "./ContentMenu.vue";
 import { RouterLink } from "vue-router";
 import LoginPopup from "./LoginPopup.vue";
 import UserPopup from "./UserPopup.vue";
-import { store } from "../store";
+import { store } from "../store.ts";
 import CenteredPopup from "./reusable/CenteredPopup.vue";
 import PathNavigation from "./PathNavigation.vue";
 
@@ -15,7 +15,7 @@ const userpopup = ref(false);
 const isSmall = window.innerWidth < 500;
 console.log(window.innerWidth);
 
-function loginHandler(name) {
+function loginHandler(name: string) {
     loginpopup.value = false;
     username.value = name;
 }
