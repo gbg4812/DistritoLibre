@@ -2,11 +2,11 @@
 import { ref } from "vue";
 import ContentMenu from "./ContentMenu.vue";
 import { RouterLink } from "vue-router";
-import LoginPopup from "./LoginPopup.vue";
+import UserLoginPopup from "./UserLoginPopup.vue";
 import UserPopup from "./UserPopup.vue";
 import { store } from "../store.ts";
 import CenteredPopup from "./reusable/CenteredPopup.vue";
-import PathNavigation from "./PathNavigation.vue";
+import NavPath from "./NavPath.vue";
 
 const loginpopup = ref(false);
 const username = ref("");
@@ -25,7 +25,7 @@ function loginHandler(name: string) {
     <div class="nav-container white-text">
         <RouterLink class="text-l" to="/">Distrito Libre</RouterLink>
 
-        <PathNavigation v-if="!isSmall" />
+        <NavPath v-if="!isSmall" />
 
         <span></span>
 
@@ -42,7 +42,7 @@ function loginHandler(name: string) {
         </div>
 
         <CenteredPopup v-if="loginpopup" @close="loginpopup = false">
-            <LoginPopup @loged-in="loginHandler"></LoginPopup>
+            <UserLoginPopup @loged-in="loginHandler"></UserLoginPopup>
         </CenteredPopup>
         <CenteredPopup v-if="userpopup" @close="userpopup = false">
             <UserPopup></UserPopup>
