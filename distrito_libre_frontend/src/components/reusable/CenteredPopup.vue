@@ -18,31 +18,31 @@ defineEmits(["close"]);
 <style scoped>
 #wraper {
     position: fixed;
-    left: 0%;
-    top: 0%;
+    left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
-    display: block;
-    backdrop-filter: blur(40px);
-    padding: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 1;
+    padding: 5rem;
 }
 
 #content {
     display: grid;
-    grid-template-rows: 2rem calc(100%-2rem);
-    max-height: 100%;
+    grid-template-rows: min-content 1fr;
     max-width: 100%;
+    max-height: 100%;
 }
 
 #customcont {
     grid-row: 2;
     border: var(--pixel-border);
-    overflow: scroll;
+    overflow: auto;
 }
 
 button {
     grid-row: 1;
-    align-self: end;
 }
 </style>
