@@ -1,40 +1,23 @@
 <script setup lang="ts">
 import PostCard from "./PostCard.vue";
 import { store } from "../store.ts";
-import { ref } from "vue";
-import { APIBASEURL } from "../constants.ts";
 import type { PostOverview } from "../types.ts";
+import { getPathData, paramValues } from "../distritoBackend.ts";
 
-const posts = ref<PostOverview[]>();
+const parms = paramValues("tag", store.tags);
+console.log(parms);
 
-async function fetchPosts() {
-    try {
-        const reqUrl = new URL("/api/posts/", APIBASEURL);
-        for (const tag of store.tags) {
-            reqUrl.searchParams.append("tag", tag);
-        }
-
-        const response = await fetch(reqUrl);
-        if (!response.ok) {
-            throw new Error("Network connection error!");
-        }
-        const data = await response.json();
-        posts.value = data;
-    } catch (error) {
-        console.error("Problem fetching the Post!", error);
-    }
-}
-
-fetchPosts();
+const { data, error } = getPathData<PostOverview[]>("/posts/", parms);
+console.log(error);
 </script>
 
 <template>
-    <div v-if="posts" id="posts-cont">
+    <div v-if="data" id="posts-cont">
         <div id="tags-cont">
             <a v-for="tag in store.tags" :key="tag">{{ tag }}</a>
         </div>
         <RouterLink
-            v-for="post in posts"
+            v-for="post in data"
             :key="post.title"
             :to="'/posts/post/' + post.title"
         >
