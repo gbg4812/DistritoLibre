@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import { marked } from "marked";
 import { useRoute } from "vue-router";
-import { APIBASEURL } from "../constants";
+import { useDistritoFetch } from "../distritoBackend";
 import { ref } from "vue";
 
-const content = ref("");
 const route = useRoute();
-const url = new URL("/api/posts/detail/" + route.params.name + "/", APIBASEURL);
-console.log(route.params.id);
-fetch(url, { credentials: "include" })
-    .then((response) => response.json())
-    .then((data) => marked.parse(data.content))
-    .then((res) => (content.value = res));
+const url = "/posts/detail/" + route.params.name + "/";
+const content = ref("");
+useDistritoFetch(url)
+    .get()
+    .json()
+    .then(({ data }) => {
+        marked.parse(data.value.content);
+    })
+    .then((code) => (content.value = code));
 </script>
 
 <template>

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import type { Post } from "../types.ts";
-import { APIBASEURL } from "../constants.ts";
+import type { Post, StateResponse } from "../types.ts";
 import { ref } from "vue";
+import IconifyPicker from "./reusable/IconifyPicker.vue";
+import { useDistritoFetch } from "../distritoBackend.ts";
 const newPost = ref<Post>({
     title: "",
     icon: "",
@@ -14,32 +15,18 @@ const postpost = () => {
     if (newPost.value == undefined) {
         return;
     }
-    const url = new URL("/api/posts/new/", APIBASEURL);
-    const data = new FormData();
-    for (const [key, value] of Object.entries(newPost.value)) {
-        data.set(key, String(value));
-    }
-    fetch(url, {
-        method: "POST",
-        body: data,
-        credentials: "include",
-    })
-        .then(
-            (resp) => {
-                return resp.json();
-            },
-            (reason) => {
-                console.log(reason);
-            },
-        )
-        .then((rsp) => {
-            console.log(rsp);
-        });
+
+    const { data, error } = useDistritoFetch<StateResponse>("/posts/new/")
+        .post(newPost)
+        .json();
+    console.log(data.value);
+    console.log(error.value);
 };
 </script>
 
 <template>
     <form @submit.prevent="postpost">
+        <h1>Create New Post</h1>
         <label for="title">Title</label>
         <input v-model="newPost.title" required type="text" name="title" />
         <label for="description">Description</label>
@@ -59,8 +46,7 @@ const postpost = () => {
             name="content"
         />
         <label for="icon">Icon</label>
-        <input v-model="newPost.icon" required type="text" name="icon" />
-
+        <IconifyPicker v-model="newPost.icon" name="icon"></IconifyPicker>
         <button type="submit">Post</button>
     </form>
 </template>

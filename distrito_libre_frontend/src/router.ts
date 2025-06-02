@@ -7,6 +7,7 @@ import PagePostList from "./components/PagePostList.vue";
 import { store } from "./store";
 import PagePostDetail from "./components/PagePostDetail.vue";
 import PagePostManagement from "./components/PagePostManagement.vue";
+import PagePostEditor from "./components/PagePostEditor.vue";
 
 const routes = [
     {
@@ -27,6 +28,7 @@ const routes = [
     { path: "/posts", component: PagePostList },
     { path: "/posts/post/:name", component: PagePostDetail },
     { path: "/posts/manager", component: PagePostManagement },
+    { path: "/posts/editor", component: PagePostEditor },
 ];
 
 const router = createRouter({

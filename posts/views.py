@@ -67,6 +67,8 @@ def new_post(request: HttpRequest):
                 author=request.user,
                 title=request.POST["title"],
                 content=request.POST["content"],
+                description=request.POST["description"],
+                icon=request.POST["icon"],
             )
             print("Adding new post ", newpst)
             newpst.save()

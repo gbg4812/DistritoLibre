@@ -2,17 +2,22 @@
 import PostCard from "./PostCard.vue";
 import { store } from "../store.ts";
 import type { PostOverview } from "../types.ts";
-import { getPathData, paramValues } from "../distritoBackend.ts";
+import { useDistritoFetch } from "../distritoBackend.ts";
 
-const parms = paramValues("tag", store.tags);
-console.log(parms);
+const parms = new URLSearchParams();
+for (const tag of store.tags) {
+    parms.append("tag", tag);
+}
 
-const { data, error } = getPathData<PostOverview[]>("/posts/", parms);
-console.log(error);
+const { isFinished, data } = useDistritoFetch<PostOverview[]>(
+    "/posts/?" + parms.toString(),
+)
+    .get()
+    .json();
 </script>
 
 <template>
-    <div v-if="data" id="posts-cont">
+    <div v-if="isFinished" id="posts-cont">
         <div id="tags-cont">
             <a v-for="tag in store.tags" :key="tag">{{ tag }}</a>
         </div>
@@ -30,8 +35,6 @@ console.log(error);
 #posts-cont {
     display: flex;
     flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
     padding: 1rem;
 }
 #tags-cont {

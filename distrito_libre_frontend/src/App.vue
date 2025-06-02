@@ -5,7 +5,7 @@ import FloatButton from "./components/reusable/FloatButton.vue";
 import { Icon } from "@iconify/vue";
 const router = useRouter();
 function onPlusClick() {
-    router.push("/posts/manager");
+    router.push("/posts/editor");
 }
 </script>
 
@@ -28,6 +28,9 @@ function onPlusClick() {
 .content {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10%;
     margin-top: 4rem;
 }
 </style>

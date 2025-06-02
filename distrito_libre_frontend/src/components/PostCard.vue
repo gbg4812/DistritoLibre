@@ -24,11 +24,8 @@ const props = defineProps<{
     </div>
 </template>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .post-container {
-    --img-width: 15rem;
-    --article-width: 30rem;
     --black-border: 1px solid black;
     background: white;
     margin: 1rem;
@@ -36,8 +33,8 @@ const props = defineProps<{
     grid-template-areas:
         "coverimg summary"
         "tags tags";
-    grid-template-columns: 15rem 45rem;
-    grid-template-rows: 15rem 1fr;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr min-content;
     border: var(--black-border);
     box-shadow: 5px 5px black;
 }
