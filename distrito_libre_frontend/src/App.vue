@@ -30,7 +30,8 @@ function onPlusClick() {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 10%;
+    max-width: 60rem;
+    margin: auto;
     margin-top: 4rem;
 }
 </style>

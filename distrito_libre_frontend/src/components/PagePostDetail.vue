@@ -11,7 +11,7 @@ useDistritoFetch(url)
     .get()
     .json()
     .then(({ data }) => {
-        marked.parse(data.value.content);
+        return marked.parse(data.value.content);
     })
     .then((code) => (content.value = code));
 </script>

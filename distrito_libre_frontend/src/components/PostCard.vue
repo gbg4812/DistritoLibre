@@ -9,10 +9,10 @@ const props = defineProps<{
 
 <template>
     <div v-if="props.post" class="post-container">
-        <Icon class="coverimg-container" :icon="props.post.icon" width="none" />
+        <Icon class="coverimg-container" :icon="props.post.icon" width="auto" />
         <div class="article-container">
-            <h1 class="title">{{ props.post.title }}</h1>
-            <h2 v-if="props.post.author" class="subtitle">
+            <h1 class="text-l">{{ props.post.title }}</h1>
+            <h2 v-if="props.post.author" class="text-m">
                 {{ props.post.author.username }}
             </h2>
             <p>{{ props.post.description }}</p>
@@ -23,11 +23,8 @@ const props = defineProps<{
         </div>
     </div>
 </template>
-
 <style scoped>
 .post-container {
-    --black-border: 1px solid black;
-    background: white;
     margin: 1rem;
     display: grid;
     grid-template-areas:
@@ -35,7 +32,7 @@ const props = defineProps<{
         "tags tags";
     grid-template-columns: 1fr 5fr;
     grid-template-rows: 1fr min-content;
-    border: var(--black-border);
+    border: var(--pixel-border);
     box-shadow: 5px 5px black;
 }
 
@@ -48,7 +45,8 @@ const props = defineProps<{
     grid-area: coverimg;
     min-height: 0;
     height: 100%;
-    border-right: var(--black-border);
+    width: 100%;
+    border-right: var(--pixel-border);
 }
 
 .article-container {
@@ -79,7 +77,7 @@ const props = defineProps<{
     align-items: center;
     justify-content: start;
     grid-area: tags;
-    border-top: var(--black-border);
+    border-top: var(--pixel-border);
     min-width: 0;
     width: 100%;
     overflow: clip;
@@ -95,7 +93,7 @@ const props = defineProps<{
 
 .article-container h2 {
     text-align: right;
-    color: gray;
+    color: var(--color-cream);
 }
 
 .article-container h1 {
@@ -106,5 +104,7 @@ const props = defineProps<{
 .article-container p {
     text-align: justify;
     flex-grow: 1;
+    min-width: 0;
+    word-break: break-word;
 }
 </style>

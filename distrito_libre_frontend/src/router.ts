@@ -2,7 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 
 import PagePlanesMap from "./components/PagePlanesMap.vue";
 import PageSectionMap from "./components/PageSectionMap.vue";
-import PageBuildingsMaps from "./components/PageBuildingsMaps.vue";
+import PageBuildingMap from "./components/PageBuildingMap.vue";
 import PagePostList from "./components/PagePostList.vue";
 import { store } from "./store";
 import PagePostDetail from "./components/PagePostDetail.vue";
@@ -24,7 +24,7 @@ const routes = [
             store.tags = [];
         },
     },
-    { path: "/sections/buildings", component: PageBuildingsMaps },
+    { path: "/sections/buildings", component: PageBuildingMap },
     { path: "/posts", component: PagePostList },
     { path: "/posts/post/:name", component: PagePostDetail },
     { path: "/posts/manager", component: PagePostManagement },

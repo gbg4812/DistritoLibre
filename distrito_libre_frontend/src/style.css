@@ -20,6 +20,9 @@
     font-style: normal;
 }
 
+@media screen and (max-width: 40rem) {
+}
+
 label,
 p,
 a,

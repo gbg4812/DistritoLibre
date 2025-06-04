@@ -3,6 +3,7 @@ import PostCard from "./PostCard.vue";
 import { store } from "../store.ts";
 import type { PostOverview } from "../types.ts";
 import { useDistritoFetch } from "../distritoBackend.ts";
+import TagsBar from "./TagsBar.vue";
 
 const parms = new URLSearchParams();
 for (const tag of store.tags) {
@@ -17,10 +18,8 @@ const { isFinished, data } = useDistritoFetch<PostOverview[]>(
 </script>
 
 <template>
+    <TagsBar></TagsBar>
     <div v-if="isFinished" id="posts-cont">
-        <div id="tags-cont">
-            <a v-for="tag in store.tags" :key="tag">{{ tag }}</a>
-        </div>
         <RouterLink
             v-for="post in data"
             :key="post.title"
@@ -35,20 +34,6 @@ const { isFinished, data } = useDistritoFetch<PostOverview[]>(
 #posts-cont {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
-}
-#tags-cont {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    overflow: clip;
-}
-
-#tags-cont a {
-    background-color: var(--color-sea-blue);
-    border: 5px solid var(--color-sea-blue);
-    border-radius: 5px;
-    color: var(--color-white);
-    margin: 0.5rem;
+    width: 100%;
 }
 </style>
