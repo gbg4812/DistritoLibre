@@ -3,6 +3,7 @@ import type { Post, StateResponse } from "../types.ts";
 import { ref } from "vue";
 import IconifyPicker from "./reusable/IconifyPicker.vue";
 import { useDistritoFetch } from "../distritoBackend.ts";
+import MilkdownWraper from "./MilkdownWraper.vue";
 const newPost = ref<Post>({
     title: "",
     icon: "",
@@ -37,14 +38,11 @@ const postpost = () => {
             name="description"
         />
         <label for="content">Content</label>
-        <textarea
+        <MilkdownWraper
             v-model="newPost.content"
-            required
-            cols="100"
-            rows="10"
-            type="text"
             name="content"
-        />
+        ></MilkdownWraper>
+
         <label for="icon">Icon</label>
         <IconifyPicker v-model="newPost.icon" name="icon"></IconifyPicker>
         <button type="submit">Post</button>
@@ -58,6 +56,7 @@ form {
     justify-content: space-around;
     align-items: stretch;
     padding: 1rem;
+    width: 100%;
 }
 
 h2 {

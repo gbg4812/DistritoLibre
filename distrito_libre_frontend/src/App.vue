@@ -32,6 +32,6 @@ function onPlusClick() {
     justify-content: center;
     max-width: 60rem;
     margin: auto;
-    margin-top: 4rem;
+    margin-top: 6rem;
 }
 </style>

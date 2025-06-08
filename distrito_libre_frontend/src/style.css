@@ -9,6 +9,13 @@
     --pixel-border: 1px solid black;
 }
 
+.hflex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
 * {
     margin: 0px;
     padding: 0px;

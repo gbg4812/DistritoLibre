@@ -2,7 +2,7 @@
 import SvgComponent from "./reusable/SvgComponent.vue";
 import SvgContainer from "./reusable/SvgContainer.vue";
 import { store } from "../store.ts";
-import { politicalMap } from "../constants";
+import { politicalMap } from "../constants.ts";
 import { useRouter } from "vue-router";
 const router = useRouter();
 
@@ -21,7 +21,7 @@ const nextStep = (id: string) => {
                 :key="index"
                 or
                 :url="`./assets/sectors/sectors.${index}.svg`"
-                :name="politicalMap[store.plane][index - 1]"
+                :name="politicalMap.get(store.plane)[index - 1]"
                 @svg-click="nextStep"
             />
         </SvgContainer>

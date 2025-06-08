@@ -23,7 +23,7 @@ useDistritoFetch(url)
 <style scoped>
 #content-wrap {
     margin: auto;
-    width: 60rem;
+    width: 100%;
 }
 
 #content-wrap > * {

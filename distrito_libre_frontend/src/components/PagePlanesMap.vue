@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import SvgComponent from "./reusable/SvgComponent.vue";
-import SvgContainer from "./reusable/SvgContainer.vue";
 import { Planes } from "../constants.js";
 import { store } from "../store.js";
 import { useRouter } from "vue-router";
+import PlanesMenu from "./PlanesMenu.vue";
 
 const router = useRouter();
 
@@ -17,20 +16,7 @@ function setPlane(plane: string) {
     <div id="cont">
         <h1>Distrito Libre</h1>
         <h2>Explore Your Convictions</h2>
-        <SvgContainer>
-            <SvgComponent
-                url="assets/planes.0.svg"
-                @svg-click="setPlane(Planes.CENTER_RIGHT)"
-            />
-            <SvgComponent
-                url="assets/planes.1.svg"
-                @svg-click="setPlane(Planes.CENTER)"
-            />
-            <SvgComponent
-                url="assets/planes.2.svg"
-                @svg-click="setPlane(Planes.CENTER_LEFT)"
-            />
-        </SvgContainer>
+        <PlanesMenu></PlanesMenu>
     </div>
 </template>
 
