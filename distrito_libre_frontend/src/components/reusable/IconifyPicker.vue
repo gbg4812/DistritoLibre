@@ -14,18 +14,18 @@ const iconsearch = useTemplateRef("iconsearch");
 
 const baseurl = new URL("search", "https://api.iconify.design");
 baseurl.searchParams.set("limit", "32");
-baseurl.searchParams.set("prefix", "tabler");
 baseurl.searchParams.set("query", "");
 
 const url = ref(baseurl.toString());
-const { data } = useFetch(url, { refetch: searching }).get().json();
+const { data } = useFetch(url, { refetch: searching, immediate: false })
+    .get()
+    .json();
 const previcon = ref("tabler:list-search");
 
 function onInput() {
     if (iconsearch.value) {
         searching.value = iconsearch.value.value.length >= 3;
         if (searching.value) {
-            model.value = iconsearch.value.value;
             baseurl.searchParams.set("query", iconsearch.value.value);
             url.value = baseurl.toString();
             previcon.value = "tabler:list-search";
@@ -34,12 +34,12 @@ function onInput() {
 }
 
 function onClick(event: Event) {
-    console.log("selected!");
     if (iconsearch.value) {
         const target = event.target as HTMLOptionElement;
         iconsearch.value.value = target.value;
-        searching.value = false;
         previcon.value = iconsearch.value.value;
+        model.value = iconsearch.value.value;
+        searching.value = false;
     }
 }
 </script>
@@ -75,7 +75,6 @@ function onClick(event: Event) {
 <style setup>
 #iconpicker {
     display: flex;
-    position: relative;
     align-items: center;
     justify-content: space-around;
     width: 100%;
@@ -83,6 +82,7 @@ function onClick(event: Event) {
 
 .search-wraper {
     width: 100%;
+    position: relative;
 }
 
 #previcon {
@@ -96,8 +96,8 @@ input {
 #options {
     position: absolute;
     background-color: var(--color-white);
-    width: inherit;
     border: var(--pixel-border);
+    width: 100%;
 }
 
 option {

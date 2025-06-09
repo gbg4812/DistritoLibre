@@ -22,8 +22,8 @@ const { isFinished, data } = useDistritoFetch<PostOverview[]>(
     <div v-if="isFinished" id="posts-cont">
         <RouterLink
             v-for="post in data"
-            :key="post.title"
-            :to="'/posts/post/' + post.title"
+            :key="post.id"
+            :to="'/posts/post/' + post.id"
         >
             <PostCard :post="post"></PostCard>
         </RouterLink>

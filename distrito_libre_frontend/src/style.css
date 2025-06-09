@@ -1,12 +1,13 @@
 :root {
     --color-black: #000000ff;
-    --color-gray: #d1d1d1ff;
+    --color-gray: #a1a1a1ff;
     --color-white: #ffffffff;
     --color-light-cream: #f1efecff;
     --color-cream: #d4c9beff;
     --color-sea-blue: #123458ff;
     --color-bluish-dark: #030303ff;
     --pixel-border: 1px solid black;
+    --focus-outline: 1px solid var(--color-sea-blue);
 }
 
 .hflex {
@@ -47,6 +48,11 @@ h3,
     font-size: 1.5rem;
 }
 
+h3,
+.text-subtitle {
+    color: var(--color-gray);
+}
+
 h1,
 .text-l {
     font-weight: 800;
@@ -64,14 +70,17 @@ h1,
 }
 
 input,
-button {
+button,
+select,
+.editable {
     border: var(--pixel-border);
     border-radius: 0px;
     padding: 0.5rem;
 }
 
-input:focus {
-    outline: 1px solid var(--color-sea-blue);
+input:focus,
+.editable:focus {
+    outline: -var(--focus-outline);
 }
 
 button.black-text:hover {

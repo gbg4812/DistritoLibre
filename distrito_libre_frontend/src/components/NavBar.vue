@@ -30,15 +30,15 @@ function loginHandler(name: string) {
         <span></span>
 
         <div v-if="!isSmall">
-            <h3
+            <h2
                 v-if="store.authenticated"
                 class="clickable"
                 @click="userpopup = true"
             >
                 {{ username }}
-            </h3>
+            </h2>
 
-            <h3 v-else class="clickable" @click="loginpopup = true">Login</h3>
+            <h2 v-else class="clickable" @click="loginpopup = true">Login</h2>
         </div>
 
         <CenteredPopup v-if="loginpopup" @close="loginpopup = false">

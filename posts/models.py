@@ -9,7 +9,7 @@ def get_anonymus_user():
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=64, primary_key=True)
+    name = models.CharField(max_length=64, unique=True)
 
 
 class TagBuilding(Tag):
@@ -17,7 +17,7 @@ class TagBuilding(Tag):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=64, primary_key=True)
+    title = models.CharField(max_length=64, unique=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, default=get_anonymus_user
     )

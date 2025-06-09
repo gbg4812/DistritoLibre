@@ -5,7 +5,7 @@ import { useDistritoFetch } from "../distritoBackend";
 import { ref } from "vue";
 
 const route = useRoute();
-const url = "/posts/detail/" + route.params.name + "/";
+const url = "/posts/detail/" + route.params.id + "/";
 const content = ref("");
 useDistritoFetch(url)
     .get()

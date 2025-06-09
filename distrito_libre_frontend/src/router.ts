@@ -26,7 +26,7 @@ const routes = [
     },
     { path: "/sections/buildings", component: PageBuildingMap },
     { path: "/posts", component: PagePostList },
-    { path: "/posts/post/:name", component: PagePostDetail },
+    { path: "/posts/post/:id", component: PagePostDetail },
     { path: "/posts/manager", component: PagePostManagement },
     { path: "/posts/editor", component: PagePostEditor },
 ];

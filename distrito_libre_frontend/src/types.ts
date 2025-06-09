@@ -1,4 +1,5 @@
 export interface PostOverview {
+    id: number;
     title: string;
     author: {
         username: string;
@@ -9,6 +10,7 @@ export interface PostOverview {
 }
 
 export interface Post {
+    id: number;
     title: string;
     author?: {
         username: string;

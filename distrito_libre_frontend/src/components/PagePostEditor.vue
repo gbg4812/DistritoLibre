@@ -3,8 +3,9 @@ import type { Post, StateResponse } from "../types.ts";
 import { ref } from "vue";
 import IconifyPicker from "./reusable/IconifyPicker.vue";
 import { useDistritoFetch } from "../distritoBackend.ts";
-import MilkdownWraper from "./MilkdownWraper.vue";
+import EditorWraper from "./EditorWraper.vue";
 const newPost = ref<Post>({
+    id: 0,
     title: "",
     icon: "",
     description: "",
@@ -12,14 +13,22 @@ const newPost = ref<Post>({
     tags: [],
 });
 
+function toFormData(data: object): FormData {
+    const res = new FormData();
+    for (const [key, value] of Object.entries(data)) {
+        res.set(key, value);
+    }
+    return res;
+}
+
 const postpost = () => {
     if (newPost.value == undefined) {
         return;
     }
 
-    const { data, error } = useDistritoFetch<StateResponse>("/posts/new/")
-        .post(newPost)
-        .json();
+    const { data, error } = useDistritoFetch<StateResponse>("/posts/new/").post(
+        toFormData(newPost.value),
+    );
     console.log(data.value);
     console.log(error.value);
 };
@@ -38,10 +47,7 @@ const postpost = () => {
             name="description"
         />
         <label for="content">Content</label>
-        <MilkdownWraper
-            v-model="newPost.content"
-            name="content"
-        ></MilkdownWraper>
+        <EditorWraper v-model="newPost.content" name="content"></EditorWraper>
 
         <label for="icon">Icon</label>
         <IconifyPicker v-model="newPost.icon" name="icon"></IconifyPicker>

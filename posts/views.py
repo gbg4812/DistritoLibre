@@ -46,8 +46,8 @@ def post_list(request: HttpRequest) -> HttpResponse:
         return HttpResponseBadRequest()
 
 
-def post(request: HttpRequest, title: str) -> HttpResponse:
-    query = Post.objects.get(title__iexact=title)
+def post(request: HttpRequest, id: int) -> HttpResponse:
+    query = Post.objects.get(pk=id)
     post = PostsSerializer(query)
     if request.method == "GET":
         return JsonResponse(post.data)

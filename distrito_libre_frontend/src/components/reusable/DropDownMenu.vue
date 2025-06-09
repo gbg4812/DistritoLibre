@@ -26,7 +26,7 @@ watch(show_menu, (value) => {
     >
         <div id="title" class="clickable text-m">
             <Icon :icon="icon" />
-            <h3>{{ props.title }}</h3>
+            <h2>{{ props.title }}</h2>
         </div>
         <div v-if="show_menu" id="content" class="white-text">
             <slot></slot>

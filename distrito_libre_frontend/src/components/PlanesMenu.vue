@@ -1,37 +1,31 @@
 <template>
     <div id="wraper">
-        <div
-            v-for="el in 3"
-            id="plane"
-            :key="el"
-            :style="{
-                '--offset': (el - 2) * 200 + 'px',
-                '--rotZ': (el - 2) * 22 + 'deg',
-            }"
-            :class="classes"
-        >
-            <div class="seccio"></div>
-            <div class="seccio"></div>
-            <div class="seccio"></div>
-            <div class="seccio"></div>
-            <span></span>
-            <div class="seccio"></div>
-            <div class="seccio"></div>
-            <div class="seccio"></div>
-            <div class="seccio"></div>
-        </div>
+        <TransitionGroup name="horiztrans" appear>
+            <div
+                v-for="el in 3"
+                id="plane"
+                :key="el"
+                :style="{
+                    '--offset': (el - 2) * 200 + 'px',
+                    '--rotZ': (el - 2) * 22 + 'deg',
+                }"
+                class="horiztrans"
+            >
+                <div class="seccio"></div>
+                <div class="seccio"></div>
+                <div class="seccio"></div>
+                <div class="seccio"></div>
+                <span></span>
+                <div class="seccio"></div>
+                <div class="seccio"></div>
+                <div class="seccio"></div>
+                <div class="seccio"></div>
+            </div>
+        </TransitionGroup>
     </div>
-    <button @click="transform">Transform</button>
 </template>
 
-<script setup>
-import { ref } from "vue";
-const classes = ref([]);
-function transform() {
-    if (!classes.value.includes("horiztrans")) classes.value.push("horiztrans");
-    else classes.value = classes.value.filter((el) => el != "horiztrans");
-}
-</script>
+<script setup lang="ts"></script>
 
 <style scoped>
 #wraper {
@@ -53,16 +47,23 @@ function transform() {
     color: #000000;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap);
     width: min-content;
     height: min-content;
-    gap: var(--gap);
-    transition: transform 1s;
     transform-style: preserve-3d;
 }
 
 .horiztrans {
     transform: rotateX(60deg) rotateZ(45deg) rotateZ(var(--rotZ))
         translateZ(var(--offset));
+}
+
+.horiztrans-enter-active {
+    transition: transform 1s;
+}
+
+.horiztrans-enter-from {
+    transform: initial;
 }
 
 .seccio {
