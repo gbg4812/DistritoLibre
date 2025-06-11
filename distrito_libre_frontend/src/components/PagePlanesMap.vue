@@ -30,5 +30,6 @@ h1 {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: 100%;
 }
 </style>
