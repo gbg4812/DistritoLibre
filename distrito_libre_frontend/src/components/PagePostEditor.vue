@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import type { Post, StateResponse } from "../types.ts";
+import type { Post } from "../types.ts";
 import { ref } from "vue";
 import IconifyPicker from "./reusable/IconifyPicker.vue";
-import { useDistritoFetch } from "../distritoBackend.ts";
+import { getPost, isString, postPost } from "../distritoBackend.ts";
 import EditorWraper from "./EditorWraper.vue";
+import { useRoute } from "vue-router";
 const newPost = ref<Post>({
     id: 0,
     title: "",
@@ -13,21 +14,18 @@ const newPost = ref<Post>({
     tags: [],
 });
 
-const postpost = () => {
-    if (newPost.value == undefined) {
-        return;
-    }
+const route = useRoute();
+if (isString(route.params.id)) {
+    getPost(Number(route.params.id)).then((post) => (newPost.value = post));
+}
 
-    const { data, error } = useDistritoFetch<StateResponse>("/posts/new/").post(
-        toFormData(newPost.value),
-    );
-    console.log(data.value);
-    console.log(error.value);
-};
+function onPost() {
+    postPost(newPost.value);
+}
 </script>
 
 <template>
-    <form @submit.prevent="postpost">
+    <form @submit.prevent="onPost">
         <h1>Create New Post</h1>
         <label for="title">Title</label>
         <input v-model="newPost.title" required type="text" name="title" />

@@ -2,24 +2,20 @@
 import PostCard from "./PostCard.vue";
 import { store } from "../store.ts";
 import type { PostOverview } from "../types.ts";
-import { useDistritoFetch } from "../distritoBackend.ts";
+import { getPostList } from "../distritoBackend.ts";
 import TagsBar from "./TagsBar.vue";
+import { ref } from "vue";
 
-const parms = new URLSearchParams();
-for (const tag of store.tags) {
-    parms.append("tag", tag);
-}
+const mp = new Map();
+mp.set("tag", store.tags);
 
-const { isFinished, data } = useDistritoFetch<PostOverview[]>(
-    "/posts/?" + parms.toString(),
-)
-    .get()
-    .json();
+const data = ref<PostOverview[]>();
+getPostList(mp).then((res) => (data.value = res));
 </script>
 
 <template>
     <TagsBar></TagsBar>
-    <div v-if="isFinished" id="posts-cont">
+    <div v-if="data" id="posts-cont">
         <RouterLink
             v-for="post in data"
             :key="post.id"

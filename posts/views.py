@@ -3,14 +3,14 @@ from django.http import (
     HttpRequest,
     HttpResponseBadRequest,
     HttpResponseForbidden,
+    HttpResponseServerError,
     JsonResponse,
     HttpResponse,
 )
 
-from .models import Post, Tag, TagBuilding
-from django.contrib.auth.models import User
+from .models import Post, TagBuilding
 from .serializers import PostsSerializer
-from django.db.models import F, Count
+from django.db.models import Count
 
 
 class StateCodes(enum.IntEnum):
@@ -47,17 +47,22 @@ def post_list(request: HttpRequest) -> HttpResponse:
 
 
 def post(request: HttpRequest, id: int) -> HttpResponse:
-    query = Post.objects.get(pk=id)
-    post = PostsSerializer(query)
-    if request.method == "GET":
-        return JsonResponse(post.data)
-    if request.method == "DELETE":
-        if request.user.is_authenticated and request.user == query.author:
-            query.delete()
-            return JsonResponse(new_state_response(StateCodes.OPERATION_SUCCESSFUL))
-        else:
-            return HttpResponseForbidden()
-    return HttpResponseBadRequest()
+    try:
+        query = Post.objects.get(pk=id)
+
+        post = PostsSerializer(query)
+
+        if request.method == "GET":
+            return JsonResponse(post.data)
+        if request.method == "DELETE":
+            if request.user.is_authenticated and request.user == query.author:
+                query.delete()
+                return JsonResponse(new_state_response(StateCodes.OPERATION_SUCCESSFUL))
+            else:
+                return HttpResponseForbidden()
+    except Post.DoesNotExist:
+        return HttpResponseBadRequest()
+    return HttpResponseServerError()
 
 
 def new_post(request: HttpRequest):

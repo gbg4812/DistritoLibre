@@ -4,7 +4,7 @@ import type { Post, PostOverview, StateResponse } from "./types";
 
 export type SearchParams = Map<string, string | string[]>;
 
-function isString(data: string | string[]): data is string {
+export function isString(data: string | string[]): data is string {
     return typeof data === "string";
 }
 

@@ -23,6 +23,7 @@ const editor = useEditor({
         Image,
         Placeholder.configure({ placeholder: "Write text or Markdown! ..." }),
     ],
+    content: model.value,
     onTransaction: ({ editor }) => {
         let lev = 0;
         if (editor.isActive("heading")) {

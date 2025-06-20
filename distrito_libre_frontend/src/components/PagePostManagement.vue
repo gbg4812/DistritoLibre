@@ -2,19 +2,15 @@
 import PostCard from "./PostCard.vue";
 import { store } from "../store.ts";
 import type { PostOverview } from "../types.ts";
-import { useDistritoFetch } from "../distritoBackend.ts";
+import { getPostList } from "../distritoBackend.ts";
 import { APIBASEURL } from "../constants.ts";
+import { ref } from "vue";
 
-const parms = new URLSearchParams();
-for (const tag of store.tags) {
-    parms.append("tag", tag);
-}
+const mp = new Map();
+mp.set("tag", store.tags);
 
-const { execute, isFinished, data } = useDistritoFetch<PostOverview[]>(
-    "/posts/?" + parms.toString(),
-)
-    .get()
-    .json();
+const data = ref<PostOverview[]>();
+getPostList(mp).then((res) => (data.value = res));
 
 function deletePost(postId: number) {
     const url = new URL(
@@ -22,13 +18,13 @@ function deletePost(postId: number) {
         APIBASEURL,
     );
     fetch(url, { method: "DELETE" }).then(() => {
-        execute();
+        getPostList(mp).then((res) => (data.value = res));
     });
 }
 </script>
 
 <template>
-    <div v-if="isFinished" id="posts-cont">
+    <div v-if="data" id="posts-cont">
         <div v-for="post in data" id="postitem" :key="post.id" class="hflex">
             <RouterLink :to="'/posts/post/' + post.id" style="flex-grow: 1">
                 <PostCard :post="post"></PostCard>

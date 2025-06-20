@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, useTemplateRef } from "vue";
+import { onMounted, ref, useTemplateRef } from "vue";
 import { Icon } from "@iconify/vue";
 import { useFetch } from "@vueuse/core";
 
@@ -21,6 +21,12 @@ const { data } = useFetch(url, { refetch: searching, immediate: false })
     .get()
     .json();
 const previcon = ref("tabler:list-search");
+
+onMounted(() => {
+    if (iconsearch.value) {
+        iconsearch.value.value = model.value;
+    }
+});
 
 function onInput() {
     if (iconsearch.value) {
