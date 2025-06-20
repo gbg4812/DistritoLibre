@@ -13,14 +13,6 @@ const newPost = ref<Post>({
     tags: [],
 });
 
-function toFormData(data: object): FormData {
-    const res = new FormData();
-    for (const [key, value] of Object.entries(data)) {
-        res.set(key, value);
-    }
-    return res;
-}
-
 const postpost = () => {
     if (newPost.value == undefined) {
         return;

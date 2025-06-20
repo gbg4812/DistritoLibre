@@ -28,7 +28,7 @@ const routes = [
     { path: "/posts", component: PagePostList },
     { path: "/posts/post/:id", component: PagePostDetail },
     { path: "/posts/manager", component: PagePostManagement },
-    { path: "/posts/editor", component: PagePostEditor },
+    { path: "/posts/editor/:id", component: PagePostEditor },
 ];
 
 const router = createRouter({

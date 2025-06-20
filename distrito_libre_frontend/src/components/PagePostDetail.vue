@@ -1,17 +1,15 @@
 <script setup lang="ts">
 import { marked } from "marked";
 import { useRoute } from "vue-router";
-import { useDistritoFetch } from "../distritoBackend";
+import { getPost } from "../distritoBackend";
 import { ref } from "vue";
 
 const route = useRoute();
-const url = "/posts/detail/" + route.params.id + "/";
 const content = ref("");
-useDistritoFetch(url)
-    .get()
-    .json()
-    .then(({ data }) => {
-        return marked.parse(data.value.content);
+
+getPost(Number(route.params.id))
+    .then((post) => {
+        return marked.parse(post.content);
     })
     .then((code) => (content.value = code));
 </script>

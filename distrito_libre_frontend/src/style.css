@@ -13,7 +13,13 @@
 .hflex {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: streach;
+    justify-content: space-around;
+}
+.vflex {
+    display: flex;
+    flex-direction: column;
+    align-items: streach;
     justify-content: space-around;
 }
 

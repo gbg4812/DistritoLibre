@@ -6,6 +6,9 @@ import DropDownMenu from "./reusable/DropDownMenu.vue";
     <DropDownMenu title="Menu">
         <RouterLink class="clickable" to="/">Home</RouterLink>
         <RouterLink class="clickable" to="/posts">Posts</RouterLink>
+        <RouterLink class="clickable" to="/posts/manager"
+            >ManagePosts</RouterLink
+        >
     </DropDownMenu>
 </template>
 

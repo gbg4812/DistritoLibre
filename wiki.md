@@ -15,10 +15,7 @@
       - [Initiate login session](#initiate-login-session)
       - [Logout User](#logout-user)
       - [Set and get user info](#set-and-get-user-info)
-  - [Usage Stories](#usage-stories) -
-  [Playful exploration of posts](#playful-exploration-of-posts) -
-  [Search of post](#search-of-post) - [Login](#login) - [Logout](#logout) -
-  [New Post](#new-post)
+  - [Usage Stories](#usage-stories) - [Playful exploration of posts](#playful-exploration-of-posts) - [Search of post](#search-of-post) - [Login](#login) - [Logout](#logout) - [New Post](#new-post)
   <!--toc:end-->
 
 ## API
@@ -32,9 +29,9 @@
 
 #### Get list of posts (title, author, icon, firstlines) containing tag _tag name_, section tag _stag name_ and building tag _btag name_
 
-| Url      | /posts/?tag=_tag name_?stag=_stag name_?btag=_btag name_ |
-| -------- | -------------------------------------------------------- |
-| response | PostOverviewList                                         |
+| Url      | /posts/?tag=_tag name_ |
+| -------- | ---------------------- |
+| response | PostOverviewList       |
 
 ```ts
 interface PostOverview = {
@@ -54,9 +51,9 @@ interface PostOverviewList = {
 
 #### Get a particular post (title, author, icon, content, stags, btags, tags)
 
-| Url      | /posts/detail/\<str : title\>/ - /posts/ |
-| -------- | ---------------------------------------- |
-| response | Post                                     |
+| Url      | /posts/detail/\<int : id\>/ |
+| -------- | --------------------------- |
+| response | Post                        |
 
 ```ts
 interface Post {
@@ -75,7 +72,7 @@ interface Post {
 
 Gets the list of btags that apear in at least one post with the stag
 
-| Url      | /posts/btags/\<str : stag\>/ |
+| Url      | /posts/btags/?tag=_name_tag_ |
 | -------- | ---------------------------- |
 | response | BTagList                     |
 
@@ -85,11 +82,11 @@ interface Tag {
 }
 
 interface BTag extends Tag {
-  icon: URL;
+  icon: string;
 }
 
 interface BTagList {
-  [index: number]: BTag;
+  btags: BTag[];
 }
 ```
 
@@ -119,10 +116,10 @@ interface StateResponse {
 
 #### Delete post (title)
 
-| Url      | /posts/delete/\<str : title\>/ |
-| -------- | ------------------------------ |
-| response | StateResponse                  |
-| auth     | required                       |
+| Url      | /posts/detail/\<int : id\>/ |
+| -------- | --------------------------- |
+| response | StateResponse               |
+| auth     | required                    |
 
 ### Auth
 

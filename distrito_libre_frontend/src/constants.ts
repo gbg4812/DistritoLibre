@@ -1,4 +1,4 @@
-export const APIBASEURL = "http://localhost:5173/api/";
+export const APIBASEURL = "http://localhost:5173/";
 
 export const Planes = {
     CENTER_RIGHT: "CENTER_RIGHT",
