@@ -1,11 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import User
+
+from postsauth.models import DistritoLibreUser
 
 # Create your models here.
 
 
 def get_anonymus_user():
-    return User.objects.get_or_create(username="anonymus")[0]
+    return DistritoLibreUser.objects.get_or_create(username="anonymus")[0]
 
 
 class Tag(models.Model):
@@ -19,8 +20,10 @@ class TagBuilding(Tag):
 class Post(models.Model):
     title = models.CharField(max_length=64, unique=True)
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, default=get_anonymus_user
+        DistritoLibreUser, on_delete=models.CASCADE, default=get_anonymus_user
     )
+    creationd = models.DateTimeField(auto_now_add=True)
+    lastmodif = models.DateTimeField(auto_now=True)
 
     tags = models.ManyToManyField(Tag)
 

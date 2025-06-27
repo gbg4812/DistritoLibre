@@ -1,8 +1,9 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
+
+from postsauth.models import DistritoLibreUser
 
 
 class UserSrializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = DistritoLibreUser
         fields = ["username", "password", "email"]

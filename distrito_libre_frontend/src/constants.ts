@@ -1,42 +1,41 @@
 export const APIBASEURL = "http://localhost:5173/";
 
-export const Planes = {
-    CENTER_RIGHT: "CENTER_RIGHT",
-    CENTER: "CENTER",
-    CENTER_LEFT: "CENTER_LEFT",
-};
+export enum Planes {
+    CENTER_RIGHT = "CENTER_RIGHT",
+    CENTER = "CENTER",
+    CENTER_LEFT = "CENTER_LEFT",
+    NONE = "NONE",
+}
 
-export const politicalMap = new Map(
-    Object.entries({
-        CENTER_RIGHT: [
-            "ANARQUISMOCRISTIANO",
-            "COMUNALISMOTRADICIONALISTA",
-            "PAELOLIBERTARISMO",
-            "SOCIALISMOCRISTIANO",
-            "LIBERALISMOCONSERVADOR",
-            "NACIONALBOLCHEVISMO",
-            "FASCISMOCLERICAL",
-            "NEOREACCIONNRX",
-        ],
-        CENTER: [
-            "ANARCOCOMUNISMO",
-            "MUTUALISMO",
-            "LIBERTARISMO",
-            "SOCIALISMODEMOCRATICO",
-            "LIBERALISMOCLASICO",
-            "MARXISMOLENINISMO",
-            "FASCISMOCLASICO",
-            "CAPITALISMOILIBERAL",
-        ],
-        CENTER_LEFT: [
-            "POSANARQUISMO",
-            "ANARQUISMOEGOISTA",
-            "IZQUIERDALIBERTARIA",
-            "LUXEMBURGISMO",
-            "SOCIOLIBERALISMO",
-            "COMUNISMOPOSMARXISTA",
-            "TECNOCRACIAPROGRESISTA",
-            "JACOBINISMO",
-        ],
-    }),
-);
+export const politicalMap = {
+    CENTER_RIGHT: [
+        "ANARQUISMO_CRISTIANO",
+        "COMUNALISMO_TRADICIONALISTA",
+        "PAELO_LIBERTARISMO",
+        "SOCIALISMO_CRISTIANO",
+        "LIBERALISMO_CONSERVADOR",
+        "NACIONAL_BOLCHEVISMO",
+        "FASCISMO_CLERICAL",
+        "NEO_REACCIONNRX",
+    ],
+    CENTER: [
+        "ANARCO_COMUNISMO",
+        "MUTUALISMO",
+        "LIBERTARISMO",
+        "SOCIALISMO_DEMOCRATICO",
+        "LIBERALISMO_CLASICO",
+        "MARXISMO_LENINISMO",
+        "FASCISMO_CLASICO",
+        "CAPITALISMO_LIBERAL",
+    ],
+    CENTER_LEFT: [
+        "POS_ANARQUISMO",
+        "ANARQUISMO_EGOISTA",
+        "IZQUIERDA_LIBERTARIA",
+        "LUXEMBURGISMO",
+        "SOCIO_LIBERALISMO",
+        "COMUNISMO_POSMARXISTA",
+        "TECNOCRACIA_PROGRESISTA",
+        "JACOBINISMO",
+    ],
+};

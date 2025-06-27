@@ -1,11 +1,19 @@
 import { APIBASEURL } from "./constants";
 import { createFetch } from "@vueuse/core";
-import type { Post, PostOverview, StateResponse } from "./types";
+import type { Post, PostOverview, StateResponse, UserInfo } from "./types";
 
 export type SearchParams = Map<string, string | string[]>;
 
-export function isString(data: string | string[]): data is string {
+export function isString(data: unknown): data is string {
     return typeof data === "string";
+}
+
+export function isNumber(data: unknown): data is number {
+    return typeof data === "number";
+}
+
+export function isElement(data: unknown): data is HTMLElement {
+    return data instanceof HTMLElement;
 }
 
 export function toFormData(data: object): FormData {
@@ -66,4 +74,23 @@ export async function getPostList(params?: SearchParams) {
     const rawdata = await fetch(url, { method: "GET" });
     const data = (await rawdata.json()) as PostOverview[];
     return data;
+}
+
+export async function login(username: string, password: string) {
+    const data = toFormData({ username: username, password: password });
+
+    const url = apiUrl("/auth/login/");
+    const rawdata = await fetch(url, { method: "post", body: data });
+    const res = (await rawdata.json()) as UserInfo;
+    return res;
+}
+
+export async function getUserData() {
+    const url = apiUrl("/auth/userinfo/");
+    const response = await fetch(url, {
+        method: "GET",
+        credentials: "include",
+    });
+    const json = (await response.json()) as UserInfo;
+    return json;
 }

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import PostCard from "./PostCard.vue";
+import PushButton from "./reusable/PushButton.vue";
 import { store } from "../store.ts";
 import type { PostOverview } from "../types.ts";
 import { getPostList } from "../distritoBackend.ts";
@@ -30,12 +31,15 @@ function deletePost(postId: number) {
                 <PostCard :post="post"></PostCard>
             </RouterLink>
             <div class="vflex">
-                <button @click="deletePost(post.id)">Delete</button>
-                <RouterLink class="clickable" :to="'/posts/editor/' + post.id"
-                    >Edit</RouterLink
+                <PushButton @click="deletePost(post.id)">Delete</PushButton>
+                <PushButton @click="$router.push('/posts/editor/' + post.id)"
+                    >Edit</PushButton
                 >
             </div>
         </div>
+        <PushButton @click="$router.push('/posts/editor/new')">
+            New Post
+        </PushButton>
     </div>
 </template>
 

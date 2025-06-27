@@ -9,15 +9,13 @@ import CenteredPopup from "./reusable/CenteredPopup.vue";
 import NavPath from "./NavPath.vue";
 
 const loginpopup = ref(false);
-const username = ref("");
 const userpopup = ref(false);
 
 const isSmall = window.innerWidth < 500;
 console.log(window.innerWidth);
 
-function loginHandler(name: string) {
+function loginHandler() {
     loginpopup.value = false;
-    username.value = name;
 }
 </script>
 
@@ -30,12 +28,8 @@ function loginHandler(name: string) {
         <span></span>
 
         <div v-if="!isSmall">
-            <h2
-                v-if="store.authenticated"
-                class="clickable"
-                @click="userpopup = true"
-            >
-                {{ username }}
+            <h2 v-if="store.user" class="clickable" @click="userpopup = true">
+                {{ store.user.username }}
             </h2>
 
             <h2 v-else class="clickable" @click="loginpopup = true">Login</h2>

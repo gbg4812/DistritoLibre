@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PushButton from "./reusable/PushButton.vue";
 import { Icon } from "@iconify/vue";
 import type { PostOverview } from "../types.ts";
 
@@ -8,37 +9,32 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div v-if="props.post" class="post-container">
+    <PushButton v-if="props.post" class="post-container" :padding="false">
         <Icon class="coverimg-container" :icon="props.post.icon" width="auto" />
         <div class="article-container">
             <h1 class="text-l">{{ props.post.title }}</h1>
             <h2 v-if="props.post.author" class="text-m">
                 {{ props.post.author.username }}
             </h2>
+            <p v-if="props.post.author" class="text-s">
+                {{ props.post.creationd }}
+            </p>
             <p>{{ props.post.description }}</p>
         </div>
         <div class="lupa"></div>
         <div class="tags">
             <a v-for="tag of props.post.tags" :key="tag.name">{{ tag }}</a>
         </div>
-    </div>
+    </PushButton>
 </template>
 <style scoped>
 .post-container {
-    margin: 1rem;
     display: grid;
     grid-template-areas:
         "coverimg summary"
         "tags tags";
     grid-template-columns: 1fr 5fr;
     grid-template-rows: 1fr min-content;
-    border: var(--pixel-border);
-    box-shadow: 5px 5px black;
-}
-
-.post-container:hover {
-    translate: -5px -5px;
-    box-shadow: 10px 10px black;
 }
 
 .coverimg-container {

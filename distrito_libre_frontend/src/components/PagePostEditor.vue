@@ -4,7 +4,9 @@ import { ref } from "vue";
 import IconifyPicker from "./reusable/IconifyPicker.vue";
 import { getPost, isString, postPost } from "../distritoBackend.ts";
 import EditorWraper from "./EditorWraper.vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+const mode = ref<"create" | "update">("create");
+const isReady = ref(true);
 const newPost = ref<Post>({
     id: 0,
     title: "",
@@ -15,12 +17,21 @@ const newPost = ref<Post>({
 });
 
 const route = useRoute();
-if (isString(route.params.id)) {
-    getPost(Number(route.params.id)).then((post) => (newPost.value = post));
+const router = useRouter();
+console.log(route.params.id);
+if (route.params.id != "new") {
+    mode.value = "update";
+    isReady.value = false;
+    if (isString(route.params.id)) {
+        getPost(Number(route.params.id)).then((post) => {
+            newPost.value = post;
+            isReady.value = true;
+        });
+    }
 }
-
 function onPost() {
     postPost(newPost.value);
+    router.push("/posts/manager/");
 }
 </script>
 
@@ -37,11 +48,19 @@ function onPost() {
             name="description"
         />
         <label for="content">Content</label>
-        <EditorWraper v-model="newPost.content" name="content"></EditorWraper>
+        <EditorWraper
+            v-if="isReady"
+            v-model="newPost.content"
+            name="content"
+        ></EditorWraper>
 
         <label for="icon">Icon</label>
-        <IconifyPicker v-model="newPost.icon" name="icon"></IconifyPicker>
-        <button type="submit">Post</button>
+        <IconifyPicker
+            v-if="isReady"
+            v-model="newPost.icon"
+            name="icon"
+        ></IconifyPicker>
+        <button type="submit">{{ mode }}</button>
     </form>
 </template>
 

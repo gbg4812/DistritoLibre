@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import pyotp
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,6 +29,29 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
+LOGIN_URL = "/auth/login/"
+
+# SECURITY WARNING: keep the otp key used in production secret!
+OTP_KEY = pyotp.random_base32()
+OTP_TIME = 60 * 5
+OTP_OBJECT = pyotp.TOTP(OTP_KEY, interval=OTP_TIME)
+
+EMAIL_ADDRESS = "guillembaldi@gmail.com"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "OPTIONS": {
+            "min_length": 8,
+        },
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +64,7 @@ INSTALLED_APPS = [
     "django_extensions",
     "rest_framework",
     "corsheaders",
+    "postsauth",
     "posts",
 ]
 

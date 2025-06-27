@@ -1,37 +1,20 @@
 <script setup lang="ts">
-import { APIBASEURL } from "../constants";
-import type { UserInfo } from "../types";
-import { ref } from "vue";
-
-const userinfo = ref<UserInfo>({
-    username: "",
-    email: "",
-});
-
-const url = new URL("/api/auth/userinfo/", APIBASEURL);
-fetch(url, {
-    method: "GET",
-    credentials: "include",
-})
-    .then((response) => response.json())
-    .then((data) => {
-        userinfo.value = data;
-    });
+import { store } from "../store";
 </script>
 
 <template>
-    <form>
-        <h2>{{ userinfo.username }}</h2>
+    <form v-if="store.user">
+        <h2>{{ store.user.username }}</h2>
         <label for="username">Username: </label>
         <input
-            v-model="userinfo.username"
+            v-model="store.user.username"
             disabled="true"
             type="text"
             name="username"
         />
         <label for="email">Email: </label>
         <input
-            v-model="userinfo.email"
+            v-model="store.user.email"
             disabled="true"
             type="text"
             name="email"

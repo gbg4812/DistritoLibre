@@ -25,6 +25,6 @@ urlpatterns = [
     ),
     path(
         "auth/",
-        include("auth.urls"),
+        include("postsauth.urls"),
     ),
 ]

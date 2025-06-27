@@ -12,6 +12,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 class PostsSerializer(serializers.ModelSerializer):
     author = AuthorSerializer()
+    creationd = serializers.DateTimeField(format="%d/%m/%y %H:%M")
 
     class Meta:
         model = Post

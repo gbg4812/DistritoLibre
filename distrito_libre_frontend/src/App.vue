@@ -3,16 +3,29 @@ import { useRouter } from "vue-router";
 import NavBar from "./components/NavBar.vue";
 import FloatButton from "./components/reusable/FloatButton.vue";
 import { Icon } from "@iconify/vue";
+import { getUserData } from "./distritoBackend";
+import { store } from "./store";
+import { watch } from "vue";
 const router = useRouter();
 function onPlusClick() {
-    router.push("/posts/editor");
+    router.push("/posts/editor/new/");
 }
+
+getUserData().then((user) => {
+    store.user = user;
+});
+
+watch(store, (val) => {
+    console.log(val);
+});
 </script>
 
 <template>
     <NavBar />
-    <div class="content">
-        <RouterView />
+    <div class="center">
+        <div class="content">
+            <RouterView />
+        </div>
     </div>
     <FloatButton
         class="white-text text-m"
@@ -25,13 +38,16 @@ function onPlusClick() {
 </template>
 
 <style scoped>
+.center {
+    margin: auto;
+    max-width: 60rem;
+    margin-top: 6rem;
+}
 .content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 60rem;
-    margin: auto;
-    margin-top: 6rem;
+    margin: 4rem;
 }
 </style>

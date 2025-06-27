@@ -7,7 +7,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -16,30 +15,63 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Tag',
+            name="Tag",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=64, unique=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=64, unique=True)),
             ],
         ),
         migrations.CreateModel(
-            name='TagBuilding',
+            name="TagBuilding",
             fields=[
-                ('tag_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='posts.tag')),
-                ('icon', models.CharField(blank=True, max_length=128)),
+                (
+                    "tag_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="posts.tag",
+                    ),
+                ),
+                ("icon", models.CharField(blank=True, max_length=128)),
             ],
-            bases=('posts.tag',),
+            bases=("posts.tag",),
         ),
         migrations.CreateModel(
-            name='Post',
+            name="Post",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=64, unique=True)),
-                ('description', models.TextField(blank=True, max_length=400)),
-                ('content', models.TextField(blank=True, max_length=2000)),
-                ('icon', models.CharField(blank=True, max_length=128)),
-                ('author', models.ForeignKey(default=posts.models.get_anonymus_user, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('tags', models.ManyToManyField(to='posts.tag')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=64, unique=True)),
+                ("description", models.TextField(blank=True, max_length=400)),
+                ("content", models.TextField(blank=True, max_length=2000)),
+                ("icon", models.CharField(blank=True, max_length=128)),
+                (
+                    "author",
+                    models.ForeignKey(
+                        default=posts.models.get_anonymus_user,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                ("tags", models.ManyToManyField(to="posts.tag")),
             ],
         ),
     ]

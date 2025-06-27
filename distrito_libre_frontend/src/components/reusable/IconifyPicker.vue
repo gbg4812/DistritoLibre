@@ -14,7 +14,7 @@ const iconsearch = useTemplateRef("iconsearch");
 
 const baseurl = new URL("search", "https://api.iconify.design");
 baseurl.searchParams.set("limit", "32");
-baseurl.searchParams.set("query", "");
+baseurl.searchParams.set("query", model.value);
 
 const url = ref(baseurl.toString());
 const { data } = useFetch(url, { refetch: searching, immediate: false })
@@ -25,6 +25,9 @@ const previcon = ref("tabler:list-search");
 onMounted(() => {
     if (iconsearch.value) {
         iconsearch.value.value = model.value;
+        if (model.value) {
+            previcon.value = model.value;
+        }
     }
 });
 

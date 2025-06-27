@@ -1,19 +1,13 @@
 <script setup lang="ts">
 import { store } from "../store.ts";
-import { APIBASEURL } from "../constants";
+import { login } from "../distritoBackend.ts";
 const emit = defineEmits(["loged-in"]);
-function login() {
+function onLogin() {
     const form = document.querySelector<HTMLFormElement>("#login-form")!;
-    const data = new FormData(form);
-    const url = new URL("/api/auth/login/", APIBASEURL);
-    fetch(url, { method: "post", body: data })
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            emit("loged-in", data.username);
-            store.authenticated = true;
-        });
+    login(form["username"].value, form["password"].value).then((data) => {
+        emit("loged-in");
+        store.user = data;
+    });
 }
 </script>
 
@@ -30,7 +24,7 @@ function login() {
                 id="login-bttn"
                 class="white-text"
                 type="button"
-                @click="login"
+                @click="onLogin"
             >
                 Login
             </button>

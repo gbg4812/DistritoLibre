@@ -1,4 +1,4 @@
-import enum
+from django.contrib.auth.decorators import login_required
 from django.http import (
     HttpRequest,
     HttpResponseBadRequest,
@@ -7,45 +7,35 @@ from django.http import (
     JsonResponse,
     HttpResponse,
 )
+from django.views.decorators.http import require_GET, require_POST, require_http_methods
 
+from postsauth.views import StateCodes, new_state_response
 from .models import Post, TagBuilding
 from .serializers import PostsSerializer
 from django.db.models import Count
 
 
-class StateCodes(enum.IntEnum):
-    OPERATION_SUCCESSFUL = 0
-    ALTERNATIVE_OPERATION = 1
-    BAD_DATA = 2
-    OPERATION_FAILURE = 3
-
-
-def new_state_response(state: StateCodes, message: str | None = None):
-    return {"state": state, "message": message}
-
-
+@require_GET
 def post_list(request: HttpRequest) -> HttpResponse:
-    if request.method == "GET":
-        tags = request.GET.getlist("tag")
+    tags = request.GET.getlist("tag")
 
-        ntags = len(tags)
+    ntags = len(tags)
 
-        posts = Post.objects.all()
-        if ntags > 0:
-            result = (
-                posts.filter(tags__name__in=tags)
-                .annotate(count=Count("tags"))
-                .filter(count=ntags)
-            )
-        else:
-            result = posts
-
-        serializer = PostsSerializer(result, many=True)
-        return JsonResponse(serializer.data, safe=False)
+    posts = Post.objects.all()
+    if ntags > 0:
+        result = (
+            posts.filter(tags__name__in=tags)
+            .annotate(count=Count("tags"))
+            .filter(count=ntags)
+        )
     else:
-        return HttpResponseBadRequest()
+        result = posts
+
+    serializer = PostsSerializer(result, many=True)
+    return JsonResponse(serializer.data, safe=False)
 
 
+@require_http_methods(["GET", "DELETE"])
 def post(request: HttpRequest, id: int) -> HttpResponse:
     try:
         query = Post.objects.get(pk=id)
@@ -61,43 +51,42 @@ def post(request: HttpRequest, id: int) -> HttpResponse:
             else:
                 return HttpResponseForbidden()
     except Post.DoesNotExist:
-        return HttpResponseBadRequest()
+        return HttpResponseBadRequest(
+            new_state_response(StateCodes.BAD_DATA, "Post does not exist")
+        )
     return HttpResponseServerError()
 
 
+@require_POST
+@login_required()
 def new_post(request: HttpRequest):
-    if request.user.is_authenticated:
-        if request.method == "POST":
-            newpst = Post(
-                author=request.user,
-                title=request.POST["title"],
-                content=request.POST["content"],
-                description=request.POST["description"],
-                icon=request.POST["icon"],
-            )
-            print("Adding new post ", newpst)
-            newpst.save()
+    author = request.user
+    title = request.POST["title"]
+    newpst = Post.objects.update_or_create(title=title, author=author)
+    newpst[0].content = request.POST["content"]
+    newpst[0].description = request.POST["description"]
+    newpst[0].icon = request.POST["icon"]
+    print("Adding new post ", newpst)
+    newpst[0].save()
 
-            return JsonResponse(new_state_response(StateCodes.OPERATION_SUCCESSFUL))
-        else:
-            return HttpResponseBadRequest()
-    else:
-        return HttpResponseForbidden()
+    return JsonResponse(new_state_response(StateCodes.OPERATION_SUCCESSFUL))
 
 
+@require_GET
 def buildings_view(request: HttpRequest) -> HttpResponse:
-    if request.method == "GET":
-        tag = request.GET["tag"]
-        if len(tag) > 0:
-            btags = TagBuilding.objects.all()
-            tag_btags = (
-                Post.objects.filter(tags__name=tag)
-                .filter(tags__in=btags)
-                .values_list("tags", flat=True)
-                .distinct()
-            )
+    tag = request.GET["tag"]
+    if len(tag) > 0:
+        btags = TagBuilding.objects.all()
+        tag_btags = (
+            Post.objects.filter(tags__name=tag)
+            .filter(tags__in=btags)
+            .values_list("tags", flat=True)
+            .distinct()
+        )
 
-            result = list(btags.filter(name__in=tag_btags).values("name", "icon"))
+        result = list(btags.filter(name__in=tag_btags).values("name", "icon"))
 
-            return JsonResponse({"btags": result})
-    return HttpResponseBadRequest()
+        return JsonResponse({"btags": result})
+    return HttpResponseBadRequest(
+        new_state_response(StateCodes.BAD_DATA, "Tag not provided")
+    )

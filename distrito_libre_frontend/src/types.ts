@@ -4,6 +4,7 @@ export interface PostOverview {
     author: {
         username: string;
     };
+    creationd: string;
     icon: string;
     description: string;
     tags: Tag[];
@@ -42,5 +43,5 @@ export interface UserCredentials {
 export interface UserInfo {
     username: string;
     password?: string;
-    email: string;
+    email?: string;
 }
