@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from postsauth.models import DistritoLibreUser
+from postsauth.models import User
 
 
 class UserSrializer(serializers.ModelSerializer):
     class Meta:
-        model = DistritoLibreUser
+        model = User
         fields = ["username", "password", "email"]
