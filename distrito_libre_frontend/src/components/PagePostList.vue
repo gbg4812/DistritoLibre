@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import PostCard from "./PostCard.vue";
 import { store } from "../store.ts";
-import type { PostOverview } from "../types.ts";
-import { getPostList } from "../distritoBackend.ts";
+import type { PostOverview } from "../backend_types.ts";
+import { getPostList } from "../distrito_backend.ts";
 import TagsBar from "./TagsBar.vue";
 import { ref } from "vue";
 

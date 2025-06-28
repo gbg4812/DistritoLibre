@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import type { Post } from "../types.ts";
-import { ref } from "vue";
+import type { Post } from "../backend_types.ts";
+import { ref, watch } from "vue";
 import IconifyPicker from "./reusable/IconifyPicker.vue";
-import { getPost, isString, postPost } from "../distritoBackend.ts";
+import SearchList from "./reusable/SearchList.vue";
+import { getPost, postPost } from "../distrito_backend.ts";
+import { isString } from "../type_utils.ts";
 import EditorWraper from "./EditorWraper.vue";
 import { useRoute, useRouter } from "vue-router";
+import { politicalMap } from "../constants.ts";
 const mode = ref<"create" | "update">("create");
 const isReady = ref(true);
 const newPost = ref<Post>({
@@ -16,9 +19,20 @@ const newPost = ref<Post>({
     tags: [],
 });
 
+const sectionTag = ref<string>();
 const route = useRoute();
 const router = useRouter();
-console.log(route.params.id);
+
+watch(sectionTag, (value) => {
+    console.log(value);
+});
+
+const sections = [
+    ...politicalMap.CENTER,
+    ...politicalMap.CENTER_LEFT,
+    ...politicalMap.CENTER_RIGHT,
+];
+
 if (route.params.id != "new") {
     mode.value = "update";
     isReady.value = false;
@@ -60,6 +74,11 @@ function onPost() {
             v-model="newPost.icon"
             name="icon"
         ></IconifyPicker>
+        <SearchList
+            v-model="sectionTag"
+            name="sectionserch"
+            :data="sections"
+        ></SearchList>
         <button type="submit">{{ mode }}</button>
     </form>
 </template>

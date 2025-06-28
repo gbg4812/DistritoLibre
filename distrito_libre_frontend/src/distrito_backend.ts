@@ -1,20 +1,14 @@
 import { APIBASEURL } from "./constants";
 import { createFetch } from "@vueuse/core";
-import type { Post, PostOverview, StateResponse, UserInfo } from "./types";
+import { isString } from "./type_utils.ts";
+import type {
+    Post,
+    PostOverview,
+    StateResponse,
+    UserInfo,
+} from "./backend_types.ts";
 
 export type SearchParams = Map<string, string | string[]>;
-
-export function isString(data: unknown): data is string {
-    return typeof data === "string";
-}
-
-export function isNumber(data: unknown): data is number {
-    return typeof data === "number";
-}
-
-export function isElement(data: unknown): data is HTMLElement {
-    return data instanceof HTMLElement;
-}
 
 export function toFormData(data: object): FormData {
     const res = new FormData();

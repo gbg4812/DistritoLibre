@@ -2,7 +2,7 @@
 import { APIBASEURL } from "../constants.ts";
 import { store } from "../store.ts";
 import { ref } from "vue";
-import type { BTag } from "../types.ts";
+import type { BTag } from "../backend_types.ts";
 
 import TagsBar from "./TagsBar.vue";
 import BuildingCard from "./BuildingCard.vue";

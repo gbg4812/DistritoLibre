@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { marked } from "marked";
 import { useRoute } from "vue-router";
-import { getPost } from "../distritoBackend";
+import { getPost } from "../distrito_backend";
 import { ref } from "vue";
 
 const route = useRoute();

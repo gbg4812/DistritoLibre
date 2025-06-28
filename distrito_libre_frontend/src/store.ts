@@ -1,6 +1,6 @@
 import { reactive } from "vue";
 import { Planes } from "./constants";
-import type { UserInfo } from "./types";
+import type { UserInfo } from "./backend_types";
 
 interface Store {
     plane: string;

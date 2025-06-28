@@ -50,7 +50,7 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { politicalMap } from "../constants";
-import { isElement } from "../distritoBackend";
+import { isElement } from "../type_utils.ts";
 import { store } from "../store";
 
 const router = useRouter();
@@ -68,7 +68,7 @@ function onSeccioClick(ev: Event) {
                 store.tags.length = 0;
                 store.tags.push(seccio);
             }
-            router.push("/posts/");
+            router.push("/buildings/");
         }
     }
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { store } from "../store.ts";
-import { login } from "../distritoBackend.ts";
+import { login } from "../distrito_backend.ts";
 const emit = defineEmits(["loged-in"]);
 function onLogin() {
     const form = document.querySelector<HTMLFormElement>("#login-form")!;

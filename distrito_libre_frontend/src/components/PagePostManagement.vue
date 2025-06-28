@@ -2,8 +2,8 @@
 import PostCard from "./PostCard.vue";
 import PushButton from "./reusable/PushButton.vue";
 import { store } from "../store.ts";
-import type { PostOverview } from "../types.ts";
-import { getPostList } from "../distritoBackend.ts";
+import type { PostOverview } from "../backend_types.ts";
+import { getPostList } from "../distrito_backend.ts";
 import { APIBASEURL } from "../constants.ts";
 import { ref } from "vue";
 

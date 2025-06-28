@@ -60,7 +60,7 @@ class Command(BaseCommand):
 
     def handle(self, *args: Any, **options: Any) -> str | None:
         for item in flattened_list:
-            if Tag.objects.filter(name=item).exists():
+            if not Tag.objects.filter(name=item).exists():
                 tag = Tag.objects.create(name=item)
                 self.stdout.write(self.style.SUCCESS(f"Tag {tag.name} created"))
                 tag.save()
@@ -68,7 +68,7 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS("All section tags writen successfully"))
 
         for b in city_buildings_with_icons:
-            if TagBuilding.objects.filter(name=b[0]).exists():
+            if not TagBuilding.objects.filter(name=b[0]).exists():
                 build = TagBuilding.objects.create(name=b[0], icon=b[1])
                 self.stdout.write(self.style.SUCCESS(f"Tag {build.name} created"))
                 build.save()

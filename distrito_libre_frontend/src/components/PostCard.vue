@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import PushButton from "./reusable/PushButton.vue";
 import { Icon } from "@iconify/vue";
-import type { PostOverview } from "../types.ts";
+import type { PostOverview } from "../backend_types.ts";
 
 const props = defineProps<{
     post: PostOverview;

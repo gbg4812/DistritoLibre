@@ -3,7 +3,7 @@ import { useRouter } from "vue-router";
 import NavBar from "./components/NavBar.vue";
 import FloatButton from "./components/reusable/FloatButton.vue";
 import { Icon } from "@iconify/vue";
-import { getUserData } from "./distritoBackend";
+import { getUserData } from "./distrito_backend";
 import { store } from "./store";
 import { watch } from "vue";
 const router = useRouter();
