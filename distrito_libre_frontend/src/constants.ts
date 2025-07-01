@@ -7,6 +7,28 @@ export enum Planes {
     NONE = "NONE",
 }
 
+export const buildings = [
+    "Hospital",
+    "Library",
+    "Police Station",
+    "Fire Station",
+    "City Hall",
+    "Post Office",
+    "School",
+    "University",
+    "Museum",
+    "Theater",
+    "Courthouse",
+    "Train Station",
+    "Bus Terminal",
+    "Airport",
+    "Community Center",
+    "Sports Arena",
+    "Shopping Mall",
+    "Public Market",
+    "Power Plant",
+    "Water Treatment Plant",
+];
 export const politicalMap = {
     CENTER_RIGHT: [
         "ANARQUISMO_CRISTIANO",

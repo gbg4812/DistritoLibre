@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+import json
 from django.http import (
     HttpRequest,
     HttpResponseBadRequest,
@@ -60,12 +61,16 @@ def post(request: HttpRequest, id: int) -> HttpResponse:
 @require_POST
 @login_required()
 def new_post(request: HttpRequest):
+    # TODO:
+    data = json.loads(request.body)
     author = request.user
-    title = request.POST["title"]
+    title = data.title
     newpst = Post.objects.update_or_create(title=title, author=author)
     newpst[0].content = request.POST["content"]
     newpst[0].description = request.POST["description"]
     newpst[0].icon = request.POST["icon"]
+    print(request.POST["tags"])
+
     print("Adding new post ", newpst)
     newpst[0].save()
 

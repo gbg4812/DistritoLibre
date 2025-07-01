@@ -118,11 +118,11 @@ input {
     background-color: var(--color-white);
     border: var(--pixel-border);
     width: 100%;
+    z-index: 2;
 }
 
 option {
     padding: 0.2rem;
     border-top: 1px solid var(--color-light-cream);
-    z-index: 1;
 }
 </style>

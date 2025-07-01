@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect } from "vue";
+import { ref } from "vue";
 import SearchBar from "./SearchBar.vue";
 import { similarity } from "../../algorithms";
 const props = defineProps<{
@@ -11,19 +11,14 @@ const model = defineModel<string>({ default: "" });
 
 const sorted_data = ref(props.data);
 sorted_data.value.sort();
-watchEffect(() => {
-    sorted_data.value = props.data;
-    sorted_data.value.sort();
-});
 
 function onInput(value: string) {
     console.log("Sorting!");
-    sorted_data.value.sort((a, b) => {
+    sorted_data.value = sorted_data.value.sort((a, b) => {
         const asim = similarity(value.toLowerCase(), a.toLowerCase());
         const bsim = similarity(value.toLowerCase(), b.toLowerCase());
-        return asim - bsim;
+        return bsim - asim;
     });
-    console.log(sorted_data.value);
 }
 </script>
 <template>

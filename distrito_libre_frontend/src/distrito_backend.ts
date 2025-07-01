@@ -41,7 +41,7 @@ export async function getPost(id: number) {
 
 export async function postPost(post: Post) {
     const url = apiUrl("/posts/new/");
-    const data = toFormData(post);
+    const data = JSON.stringify(post);
     const raw = await fetch(url, {
         method: "POST",
         credentials: "include",
@@ -71,7 +71,7 @@ export async function getPostList(params?: SearchParams) {
 }
 
 export async function login(username: string, password: string) {
-    const data = toFormData({ username: username, password: password });
+    const data = JSON.stringify({ username: username, password: password });
 
     const url = apiUrl("/auth/login/");
     const rawdata = await fetch(url, { method: "post", body: data });

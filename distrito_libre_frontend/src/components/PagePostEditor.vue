@@ -7,7 +7,7 @@ import { getPost, postPost } from "../distrito_backend.ts";
 import { isString } from "../type_utils.ts";
 import EditorWraper from "./EditorWraper.vue";
 import { useRoute, useRouter } from "vue-router";
-import { politicalMap } from "../constants.ts";
+import { politicalMap, buildings } from "../constants.ts";
 const mode = ref<"create" | "update">("create");
 const isReady = ref(true);
 const newPost = ref<Post>({
@@ -20,6 +20,7 @@ const newPost = ref<Post>({
 });
 
 const sectionTag = ref<string>();
+const buildingsTag = ref<string>();
 const route = useRoute();
 const router = useRouter();
 
@@ -44,6 +45,9 @@ if (route.params.id != "new") {
     }
 }
 function onPost() {
+    if (buildingsTag.value)
+        newPost.value.tags.push({ name: buildingsTag.value });
+    if (sectionTag.value) newPost.value.tags.push({ name: sectionTag.value });
     postPost(newPost.value);
     router.push("/posts/manager/");
 }
@@ -74,10 +78,17 @@ function onPost() {
             v-model="newPost.icon"
             name="icon"
         ></IconifyPicker>
+        <label for="sectionsearch">Section</label>
         <SearchList
             v-model="sectionTag"
             name="sectionserch"
             :data="sections"
+        ></SearchList>
+        <label for="buildingsearch">Building</label>
+        <SearchList
+            v-model="buildingsTag"
+            name="buildingsearch"
+            :data="buildings"
         ></SearchList>
         <button type="submit">{{ mode }}</button>
     </form>
