@@ -12,18 +12,22 @@ const props = defineProps<{
     <PushButton v-if="props.post" class="post-container" :padding="false">
         <Icon class="coverimg-container" :icon="props.post.icon" width="auto" />
         <div class="article-container">
-            <h1 class="text-l">{{ props.post.title }}</h1>
-            <h2 v-if="props.post.author" class="text-m">
-                {{ props.post.author.username }}
-            </h2>
-            <p v-if="props.post.author" class="text-s">
-                {{ props.post.creationd }}
-            </p>
-            <p>{{ props.post.description }}</p>
+            <article>
+                <h1 class="text-l">{{ props.post.title }}</h1>
+                <p>{{ props.post.description }}</p>
+            </article>
+            <article class="vflex flex-start-start">
+                <h3 v-if="props.post.creationd" class="text-s">
+                    {{ props.post.creationd }}
+                </h3>
+                <h2 v-if="props.post.author" class="text-s">
+                    {{ props.post.author.username }}
+                </h2>
+            </article>
         </div>
         <div class="lupa"></div>
         <div class="tags">
-            <a v-for="tag of props.post.tags" :key="tag.name">{{ tag }}</a>
+            <a v-for="tag of props.post.tags" :key="tag.name">{{ tag.name }}</a>
         </div>
     </PushButton>
 </template>
@@ -33,8 +37,8 @@ const props = defineProps<{
     grid-template-areas:
         "coverimg summary"
         "tags tags";
-    grid-template-columns: 1fr 5fr;
-    grid-template-rows: 1fr min-content;
+    grid-template-columns: 6rem 7fr;
+    grid-template-rows: 6rem min-content;
 }
 
 .coverimg-container {
@@ -49,10 +53,10 @@ const props = defineProps<{
     grid-area: summary;
     display: flex;
     position: relative;
-    padding: 1rem;
+    padding: 0.5rem;
 
-    flex-direction: column;
-    justify-content: start;
+    flex-direction: row;
+    justify-content: space-between;
 
     max-height: 100%;
     min-height: 0;
@@ -85,11 +89,11 @@ const props = defineProps<{
     border-radius: 5px;
     color: var(--color-white);
     margin: 0.5rem;
+    padding: 0px;
 }
 
 .article-container h2 {
     text-align: right;
-    color: var(--color-cream);
 }
 
 .article-container h1 {
@@ -102,5 +106,12 @@ const props = defineProps<{
     flex-grow: 1;
     min-width: 0;
     word-break: break-word;
+}
+
+h1,
+h2,
+p {
+    margin: 0px;
+    padding: 0px;
 }
 </style>

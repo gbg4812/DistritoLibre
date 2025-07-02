@@ -16,7 +16,7 @@ const newPost = ref<Post>({
     icon: "",
     description: "",
     content: "",
-    tags: [],
+    tags: [{ name: "" }, { name: "" }],
 });
 
 const sectionTag = ref<string>();
@@ -80,13 +80,13 @@ function onPost() {
         ></IconifyPicker>
         <label for="sectionsearch">Section</label>
         <SearchList
-            v-model="sectionTag"
+            v-model="newPost.tags[0].name"
             name="sectionserch"
             :data="sections"
         ></SearchList>
         <label for="buildingsearch">Building</label>
         <SearchList
-            v-model="buildingsTag"
+            v-model="newPost.tags[1].name"
             name="buildingsearch"
             :data="buildings"
         ></SearchList>

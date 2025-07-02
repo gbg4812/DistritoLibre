@@ -11,7 +11,7 @@ from django.http import (
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
 
 from postsauth.views import StateCodes, new_state_response
-from .models import Post, TagBuilding
+from .models import Post, TagBuilding, Tag
 from .serializers import PostsSerializer
 from django.db.models import Count
 
@@ -61,18 +61,20 @@ def post(request: HttpRequest, id: int) -> HttpResponse:
 @require_POST
 @login_required()
 def new_post(request: HttpRequest):
-    # TODO:
     data = json.loads(request.body)
     author = request.user
-    title = data.title
-    newpst = Post.objects.update_or_create(title=title, author=author)
-    newpst[0].content = request.POST["content"]
-    newpst[0].description = request.POST["description"]
-    newpst[0].icon = request.POST["icon"]
-    print(request.POST["tags"])
+    title = data["title"]
+    newpst, _ = Post.objects.update_or_create(title=title, author=author)
+    newpst.content = data["content"]
+    newpst.description = data["description"]
+    newpst.icon = data["icon"]
+    for tagobj in data["tags"]:
+        print(tagobj)
+        tag = Tag.objects.get(name=tagobj["name"])
+        newpst.tags.add(tag)
 
     print("Adding new post ", newpst)
-    newpst[0].save()
+    newpst.save()
 
     return JsonResponse(new_state_response(StateCodes.OPERATION_SUCCESSFUL))
 
@@ -81,15 +83,11 @@ def new_post(request: HttpRequest):
 def buildings_view(request: HttpRequest) -> HttpResponse:
     tag = request.GET["tag"]
     if len(tag) > 0:
-        btags = TagBuilding.objects.all()
-        tag_btags = (
-            Post.objects.filter(tags__name=tag)
-            .filter(tags__in=btags)
-            .values_list("tags", flat=True)
-            .distinct()
+        tag_btags = TagBuilding.objects.filter(post__tags__name=tag).values(
+            "name", "icon"
         )
 
-        result = list(btags.filter(name__in=tag_btags).values("name", "icon"))
+        result = list(tag_btags)
 
         return JsonResponse({"btags": result})
     return HttpResponseBadRequest(

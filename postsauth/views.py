@@ -17,6 +17,7 @@ from django.core.mail import send_mail
 from postsauth.models import DistritoLibreUser
 from .serializers import UserSrializer
 import enum
+import json
 # Create your views here.
 
 
@@ -33,8 +34,9 @@ def new_state_response(state: StateCodes, message: str | None = None):
 
 @require_POST
 def login_view(request: HttpRequest) -> HttpResponse:
-    username = request.POST["username"]
-    password = request.POST["password"]
+    data: dict = json.loads(request.body)
+    username = data["username"]
+    password = data["password"]
     print(username, password)
 
     user = authenticate(request, password=password, username=username)
@@ -64,9 +66,10 @@ def user_info(request: HttpRequest):
 
 @require_POST
 def register_request(request: HttpRequest):
-    username = request.POST["username"]
-    password = request.POST["password"]
-    email = request.POST["email"]
+    data: dict = json.loads(request.body)
+    username = data["username"]
+    password = data["password"]
+    email = data["email"]
 
     try:
         validate_password(password)
@@ -97,8 +100,9 @@ def register_request(request: HttpRequest):
 
 @require_POST
 def register_code(request: HttpRequest):
-    code = request.POST["code"]
-    username = request.POST["username"]
+    data: dict = json.loads(request.body)
+    code = data["code"]
+    username = data["username"]
     code = settings.OTP_OBJECT.now()
     user = User.objects.get(username=username)
 

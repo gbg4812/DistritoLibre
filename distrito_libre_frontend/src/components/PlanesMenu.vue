@@ -21,26 +21,26 @@
                     name="plane"
                 />
                 <div
-                    v-for="v in val.slice(4)"
+                    v-for="v in val.slice(0, 4)"
                     :key="v"
                     :seccio="v"
                     class="seccio"
                     @click="onSeccioClick"
                 >
-                    <label>{{ v.replace("_", " ") }}</label>
+                    <label class="white-text">{{ v.replace("_", " ") }}</label>
                 </div>
                 <h1 class="plane-title">
                     {{ key.replace("_", " ") }}
                 </h1>
                 <span> </span>
                 <div
-                    v-for="v in val.slice(4, undefined)"
+                    v-for="v in val.slice(4, 8)"
                     :key="v"
                     :seccio="v"
                     class="seccio"
                     @click="onSeccioClick"
                 >
-                    <label>{{ v.replace("_", " ") }}</label>
+                    <label class="white-text">{{ v.replace("_", " ") }}</label>
                 </div>
             </label>
         </TransitionGroup>
@@ -85,8 +85,8 @@ function onSeccioClick(ev: Event) {
     position: relative;
 }
 .plane {
-    --color-orange: #ffa200;
-    --color-orange-blur: #ffcd75;
+    --color-orange: var(--color-black);
+    --color-orange-blur: var(--color-light-cream);
     position: absolute;
     font-family: Avenir, Helvetica, Arial, sans-serif;
     text-align: center;
@@ -101,6 +101,7 @@ function onSeccioClick(ev: Event) {
 }
 
 .plane-title {
+    color: var(--color-cream);
     transform-style: preserve-3d;
     position: absolute;
     top: 50%;
@@ -149,7 +150,10 @@ function onSeccioClick(ev: Event) {
     background-color: var(--color-orange);
     width: var(--seccio-width);
     height: var(--seccio-height);
-    transition: transform 0.5s background-color 0.5s box-shadow 0.5s;
+    transition:
+        transform 0.5s,
+        background-color 0.5s,
+        box-shadow 0.5s;
     box-shadow: 0px 0px 5px 0px var(--color-orange-blur);
     display: flex;
     flex-direction: column;

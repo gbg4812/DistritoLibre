@@ -13,14 +13,28 @@
 .hflex {
     display: flex;
     flex-direction: row;
-    align-items: streach;
-    justify-content: space-around;
 }
 .vflex {
     display: flex;
     flex-direction: column;
-    align-items: streach;
-    justify-content: space-around;
+}
+
+.flex-end-end {
+    align-items: end;
+    justify-content: end;
+}
+
+.flex-center-between {
+    align-items: center;
+    justify-content: space-between;
+}
+.flex-center-start {
+    align-items: center;
+    justify-content: start;
+}
+.flex-start-start {
+    align-items: start;
+    justify-content: start;
 }
 
 * {
@@ -34,8 +48,14 @@
     font-style: normal;
 }
 
+#app {
+    height: 100%;
+    width: 100%;
+}
+
 body {
     height: 100vh;
+    margin: 0px;
     scroll-behavior: smooth;
 }
 
@@ -46,9 +66,16 @@ label,
 p,
 a,
 input,
+button {
+    padding: 0.5rem;
+}
+
+label,
+p,
+a,
+input,
 button,
 .text-s {
-    padding: 0.5rem;
     font-weight: 400;
     font-size: 1rem;
 }

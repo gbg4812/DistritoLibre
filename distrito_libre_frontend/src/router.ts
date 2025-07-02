@@ -1,7 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 
 import PagePlanesMap from "./components/PagePlanesMap.vue";
-import PageSectionMap from "./components/PageSectionMap.vue";
 import PageBuildingMap from "./components/PageBuildingMap.vue";
 import PagePostList from "./components/PagePostList.vue";
 import { store } from "./store";
@@ -13,13 +12,6 @@ const routes = [
     {
         path: "/",
         component: PagePlanesMap,
-        beforeEnter: () => {
-            store.tags = [];
-        },
-    },
-    {
-        path: "/sections",
-        component: PageSectionMap,
         beforeEnter: () => {
             store.tags = [];
         },

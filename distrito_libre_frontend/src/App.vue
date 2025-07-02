@@ -42,6 +42,7 @@ watch(store, (val) => {
     margin: auto;
     max-width: 60rem;
     margin-top: 6rem;
+    height: 100%;
 }
 .content {
     display: flex;
@@ -49,5 +50,6 @@ watch(store, (val) => {
     align-items: center;
     justify-content: center;
     margin: 4rem;
+    height: 100%;
 }
 </style>

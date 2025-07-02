@@ -26,11 +26,16 @@ function deletePost(postId: number) {
 
 <template>
     <div v-if="data" id="posts-cont">
-        <div v-for="post in data" id="postitem" :key="post.id" class="hflex">
+        <div
+            v-for="post in data"
+            id="postitem"
+            :key="post.id"
+            class="vflex item-cont"
+        >
             <RouterLink :to="'/posts/post/' + post.id" style="flex-grow: 1">
-                <PostCard :post="post"></PostCard>
+                <PostCard class="postcard" :post="post"></PostCard>
             </RouterLink>
-            <div class="vflex">
+            <div id="controls">
                 <PushButton @click="deletePost(post.id)">Delete</PushButton>
                 <PushButton @click="$router.push('/posts/editor/' + post.id)"
                     >Edit</PushButton
@@ -48,5 +53,26 @@ function deletePost(postId: number) {
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+#controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+}
+
+#controls > * {
+    margin: 0.2rem;
+}
+a {
+    padding: 0px;
+}
+
+.postcard {
+    margin: 0.2rem;
+}
+
+.item-cont {
+    margin: 0.3rem;
 }
 </style>

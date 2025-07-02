@@ -20,6 +20,7 @@ import { store } from "../store";
     border: 5px solid var(--color-sea-blue);
     border-radius: 5px;
     color: var(--color-white);
-    margin: 1rem;
+    padding: 0px;
+    margin: 0.5rem;
 }
 </style>
