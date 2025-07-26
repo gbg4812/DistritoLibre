@@ -1,12 +1,12 @@
 import { createWebHistory, createRouter } from "vue-router";
 
-import PagePlanesMap from "./components/PagePlanesMap.vue";
-import PageBuildingMap from "./components/PageBuildingMap.vue";
-import PagePostList from "./components/PagePostList.vue";
+import PagePlanesMap from "./components/pages/PagePlanesMap.vue";
+import PageBuildingMap from "./components/pages/PageBuildingMap.vue";
+import PagePostList from "./components/pages/PagePostList.vue";
 import { store } from "./store";
-import PagePostDetail from "./components/PagePostDetail.vue";
-import PagePostManagement from "./components/PagePostManagement.vue";
-import PagePostEditor from "./components/PagePostEditor.vue";
+import PagePostDetail from "./components/pages/PagePostDetail.vue";
+import PagePostManagement from "./components/pages/PagePostManagement.vue";
+import PagePostEditor from "./components/pages/PagePostEditor.vue";
 
 const routes = [
     {

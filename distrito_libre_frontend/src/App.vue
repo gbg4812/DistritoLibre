@@ -21,35 +21,39 @@ watch(store, (val) => {
 </script>
 
 <template>
-    <NavBar />
-    <div class="center">
-        <div class="content">
-            <RouterView />
-        </div>
+    <div id="content">
+        <NavBar id="navbar" />
+        <RouterView id="main" />
+        <FloatButton
+            class="white-text text-m"
+            bottom="2rem"
+            right="2rem"
+            @click="onPlusClick"
+        >
+            <Icon icon="tabler:plus"></Icon>
+        </FloatButton>
     </div>
-    <FloatButton
-        class="white-text text-m"
-        bottom="2rem"
-        right="2rem"
-        @click="onPlusClick"
-    >
-        <Icon icon="tabler:plus"></Icon>
-    </FloatButton>
 </template>
 
 <style scoped>
-.center {
-    margin: auto;
-    max-width: 60rem;
-    margin-top: 6rem;
+#content {
+    display: grid;
+    grid-template-areas: "navbar" "main";
+    grid-template-columns: 4fr;
+    grid-template-rows: 4rem 1fr;
     height: 100%;
+    width: 100%;
 }
-.content {
+
+#navbar {
+    grid-area: navbar;
+}
+#main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin: 4rem;
-    height: 100%;
+    justify-content: start;
+    grid-area: main;
+    overflow: scroll;
 }
 </style>

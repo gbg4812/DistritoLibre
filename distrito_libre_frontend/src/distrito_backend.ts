@@ -79,6 +79,13 @@ export async function login(username: string, password: string) {
     return res;
 }
 
+export async function logout() {
+    const url = apiUrl("/auth/logout/");
+    const rawdata = await fetch(url, { method: "post" });
+    const res = (await rawdata.json()) as StateResponse;
+    return res;
+}
+
 export async function getUserData() {
     const url = apiUrl("/auth/userinfo/");
     const response = await fetch(url, {

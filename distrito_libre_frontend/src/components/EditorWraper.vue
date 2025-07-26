@@ -62,16 +62,17 @@ function onImage() {
     <div v-if="editor">
         <div id="control-grp">
             <button
+                tabindex="2"
                 :class="{ boldtxt: editor.isActive('bold') }"
                 @click.prevent="editor.chain().focus().toggleBold().run()"
             >
                 B
             </button>
-            <button @click.prevent="onImage">
+            <button tabindex="3" @click.prevent="onImage">
                 <Icon icon="material-symbols:image-outline"></Icon>
             </button>
             <!-- TODO  -->
-            <select ref="headingsel" @change="onHeading">
+            <select ref="headingsel" tabindex="4" @change="onHeading">
                 <option value="0">Paragraph</option>
                 <option value="1">Header 1</option>
                 <option value="2">Header 2</option>

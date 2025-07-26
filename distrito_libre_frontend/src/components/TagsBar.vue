@@ -11,7 +11,7 @@ import { store } from "../store";
 #tags-cont {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: center;
     overflow: clip;
 }
 

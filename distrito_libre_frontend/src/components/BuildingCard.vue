@@ -14,7 +14,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <div id="cont">
+    <div id="cont" :name="props.name">
         <Icon :icon="props.icon" width="10rem" />
         <h3>{{ props.name }}</h3>
     </div>

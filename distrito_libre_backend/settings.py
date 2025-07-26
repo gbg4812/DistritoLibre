@@ -29,7 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
-LOGIN_URL = "/auth/login/"
+LOGIN_URL = "/auth/shouldlogin/"
 
 # SECURITY WARNING: keep the otp key used in production secret!
 OTP_KEY = pyotp.random_base32()

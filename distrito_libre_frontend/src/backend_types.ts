@@ -1,3 +1,9 @@
+export enum StateCodes {
+    OPERATION_SUCCESSFUL = 0,
+    ALTERNATIVE_OPERATION = 1,
+    BAD_DATA = 2,
+    OPERATION_FAILURE = 3,
+}
 export interface PostOverview {
     id: number;
     title: string;
@@ -31,7 +37,7 @@ export interface BTag extends Tag {
 }
 
 export interface StateResponse {
-    state: number;
+    state: StateCodes;
     message?: string;
 }
 

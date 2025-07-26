@@ -1,6 +1,6 @@
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import UserManager, User
+from .auth_decorators import login_required
+from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.conf import settings
 from django.http import (
@@ -13,23 +13,12 @@ from django.http import (
 from django.views.decorators.http import require_POST, require_GET
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
+from .auth_decorators import StateCodes, new_state_response
 
 from postsauth.models import DistritoLibreUser
 from .serializers import UserSrializer
-import enum
 import json
 # Create your views here.
-
-
-class StateCodes(enum.IntEnum):
-    OPERATION_SUCCESSFUL = 0
-    ALTERNATIVE_OPERATION = 1
-    BAD_DATA = 2
-    OPERATION_FAILURE = 3
-
-
-def new_state_response(state: StateCodes, message: str | None = None):
-    return {"state": state, "message": message}
 
 
 @require_POST
@@ -49,14 +38,14 @@ def login_view(request: HttpRequest) -> HttpResponse:
 
 
 @require_POST
-@login_required()
+@login_required
 def logout_view(request: HttpRequest):
     logout(request)
-    return JsonResponse(new_state_response(StateCodes.OPERATION_SUCCESSFUL))
+    return HttpResponse(new_state_response(StateCodes.OPERATION_SUCCESSFUL))
 
 
 @require_GET
-@login_required()
+@login_required
 def user_info(request: HttpRequest):
     if request.user.is_authenticated:
         user = UserSrializer(request.user)
@@ -89,7 +78,7 @@ def register_request(request: HttpRequest):
             [email],
             html_message=f"Your code is: <h1>{code}</h1>",
         )
-        return JsonResponse(
+        return HttpResponse(
             new_state_response(StateCodes.OPERATION_SUCCESSFUL, "Code Required")
         )
     except ValidationError:

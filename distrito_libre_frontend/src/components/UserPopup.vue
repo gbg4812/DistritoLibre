@@ -1,9 +1,16 @@
 <script setup lang="ts">
+import { logout } from "../distrito_backend";
 import { store } from "../store";
+const emit = defineEmits(["logout"]);
+function onLogout() {
+    logout();
+    store.user = null;
+    emit("logout");
+}
 </script>
 
 <template>
-    <form v-if="store.user">
+    <form v-if="store.user" @submit.prevent="onLogout">
         <h2>{{ store.user.username }}</h2>
         <label for="username">Username: </label>
         <input
@@ -19,6 +26,7 @@ import { store } from "../store";
             type="text"
             name="email"
         />
+        <button type="submit">Logout</button>
     </form>
 </template>
 

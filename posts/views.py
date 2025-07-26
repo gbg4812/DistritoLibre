@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import login_required
 import json
 from django.http import (
     HttpRequest,
@@ -10,7 +9,7 @@ from django.http import (
 )
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
 
-from postsauth.views import StateCodes, new_state_response
+from postsauth.auth_decorators import new_state_response, StateCodes, login_required
 from .models import Post, TagBuilding, Tag
 from .serializers import PostsSerializer
 from django.db.models import Count
@@ -48,7 +47,7 @@ def post(request: HttpRequest, id: int) -> HttpResponse:
         if request.method == "DELETE":
             if request.user.is_authenticated and request.user == query.author:
                 query.delete()
-                return JsonResponse(new_state_response(StateCodes.OPERATION_SUCCESSFUL))
+                return HttpResponse(new_state_response(StateCodes.OPERATION_SUCCESSFUL))
             else:
                 return HttpResponseForbidden()
     except Post.DoesNotExist:
@@ -59,7 +58,7 @@ def post(request: HttpRequest, id: int) -> HttpResponse:
 
 
 @require_POST
-@login_required()
+@login_required
 def new_post(request: HttpRequest):
     data = json.loads(request.body)
     author = request.user
@@ -76,7 +75,7 @@ def new_post(request: HttpRequest):
     print("Adding new post ", newpst)
     newpst.save()
 
-    return JsonResponse(new_state_response(StateCodes.OPERATION_SUCCESSFUL))
+    return HttpResponse(new_state_response(StateCodes.OPERATION_SUCCESSFUL))
 
 
 @require_GET

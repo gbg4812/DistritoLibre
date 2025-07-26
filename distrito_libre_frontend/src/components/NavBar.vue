@@ -14,9 +14,7 @@ const userpopup = ref(false);
 const isSmall = window.innerWidth < 500;
 console.log(window.innerWidth);
 
-function loginHandler() {
-    loginpopup.value = false;
-}
+loginpopup.value = false;
 </script>
 
 <template>
@@ -36,10 +34,10 @@ function loginHandler() {
         </div>
 
         <CenteredPopup v-if="loginpopup" @close="loginpopup = false">
-            <UserLoginPopup @loged-in="loginHandler"></UserLoginPopup>
+            <UserLoginPopup @loged-in="loginpopup = false"></UserLoginPopup>
         </CenteredPopup>
         <CenteredPopup v-if="userpopup" @close="userpopup = false">
-            <UserPopup></UserPopup>
+            <UserPopup @logout="userpopup = false"></UserPopup>
         </CenteredPopup>
 
         <ContentMenu />
@@ -53,11 +51,8 @@ function loginHandler() {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
 
     width: 100%;
-    height: 4rem;
-    top: 0px;
     z-index: 2;
     box-sizing: border-box;
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { marked } from "marked";
 import { useRoute } from "vue-router";
-import { getPost } from "../distrito_backend";
+import { getPost } from "../../distrito_backend";
 import { ref } from "vue";
 
 const route = useRoute();
@@ -15,15 +15,10 @@ getPost(Number(route.params.id))
 </script>
 
 <template>
-    <div id="content-wrap" v-html="content"></div>
+    <div v-html="content"></div>
 </template>
 
 <style scoped>
-#content-wrap {
-    margin: auto;
-    width: 100%;
-}
-
 #content-wrap > * {
     margin: 0.5rem;
     text-align: justify;
