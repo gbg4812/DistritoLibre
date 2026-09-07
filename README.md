@@ -15,7 +15,7 @@ npm install
 #### Compiles and hot-reloads for development
 
 ```sh
-npm run serve
+npm run dev
 ```
 
 #### Compiles and minifies for production
@@ -24,24 +24,15 @@ npm run serve
 npm run build
 ```
 
-#### Lints and fixes files
-
-```sh
-npm run lint
-```
-
-#### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Backend Django
 Install requirements and run inside a venv environment!
 ### Project setup
 ```sh
-pip -r requirements.txt
+pip install -r requirements.txt
 
 # only for dev
-pip -r requirements.dev.txt
+pip install -r requirements.dev.txt
 ```
 ### Run with
 ```sh
